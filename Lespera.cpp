@@ -5,65 +5,84 @@
 #include "LEspera.h"
 #include "structs.h"
 
-
 using namespace std;
 
-void createLEspera(LEspera & LEsperaC) {
-	LEsperaC.inicio = NULL;
+void createLEspera(LEspera& f) {
+	f.primeiro = NULL;
 }
 
+bool isEmptyLEspera(LEspera& f) {
+	return f.primeiro == NULL;
+}
 
-void addCarToLEspera(LEspera & LEsperaC, LEspera::Item* car) {
-	if (LEsperaC.inicio == NULL) {
-		LEsperaC.inicio = car;
-		car->next = NULL;
+void addToLEspera(LEspera& f, Car* car) {
+	LEspera::Item* novo = new LEspera::Item;
+	novo->car = car;
+	novo->seguinte = NULL;
+	if (f.primeiro == NULL) {
+		f.primeiro = novo;
 	}
 	else {
-		car->next = LEsperaC.inicio;
-		LEsperaC.inicio = car;
-	}
-}
-
-// size of LEspera
-
-int numElementos(LEspera* LEspera) {
-	LEspera* aux = LEspera;
-	int numElems = 0;
-	while (aux != NULL) {
-		numElems++;
-		aux = aux->next;
-	}
-	return numElems;
-}
-
-void removeCarFromLEspera(LEspera*& LEsperaC) {
-	int numElems = numElementos
-}
-
-void printLEspera(LEspera* LEspera) {
-	LEspera* aux = LEspera;
-	while (aux != NULL) {
-		cout << aux->car->id << endl;
-		aux = aux->next;
-	}
-}
-
-void addCarPriority(LEspera*& LEspera, int ID) {
-	LEspera* aux = LEspera;
-	LEspera* aux2 = NULL;
-	while (aux != NULL) {
-		if (aux->car->id == ID) {
-			if (aux2 == NULL) {
-				return;
-			}
-			else {
-				aux2->next = aux->next;
-				aux->next = LEspera;
-				LEspera = aux;
-				return;
-			}
+		LEspera::Item* aux = f.primeiro;
+		while (aux->seguinte != NULL) {
+			aux = aux->seguinte;
 		}
-		aux2 = aux;
-		aux = aux->next;
+		aux->seguinte = novo;
+	}
+}
+
+void removeFromLEspera(LEspera& f) {
+	if (f.primeiro == NULL) {
+		throw Car();
+	}
+	else {
+		LEspera::Item* aux = f.primeiro;
+		f.primeiro = f.primeiro->seguinte;
+		delete aux;
+	}
+}
+
+Car firstFromLEspera(LEspera& f) {
+	if (f.primeiro == NULL) {
+		throw Car();
+	}
+	else {
+		return *f.primeiro->car;
+	}
+}
+
+void printLEspera(LEspera& f) {
+	if (f.primeiro == NULL) {
+		cout << "Lista de espera vazia" << endl;
+	}
+	else {
+		LEspera::Item* aux = f.primeiro;
+		while (aux != NULL) {
+			cout << "ID: " << aux->car->id << endl;
+			cout << "Marca: " << aux->car->marca << endl;
+			cout << "Modelo: " << aux->car->modelo << endl;
+			cout << "Fila: " << aux->car->fila << endl;
+			cout << "Prioritario: " << aux->car->prioritario << endl;
+			cout << "Reparado: " << aux->car->reparado << endl;
+			cout << "IDET: " << aux->car->idet << endl;
+			cout << "Tempo de reparacao: " << aux->car->temporeparar << endl;
+			cout << "Tempo de espera: " << aux->car->tempoet << endl;
+			aux = aux->seguinte;
+		}
+	}
+}
+
+void addCarPriority(LEspera& f, int ID) {
+	if (f.primeiro == NULL) {
+		throw Car();
+	}
+	else {
+		LEspera::Item* aux = f.primeiro;
+		while (aux != NULL) {
+			if (aux->car->id == ID) {
+				aux->car->prioritario = true;
+			}
+			aux = aux->seguinte;
+		}
 	}
 }

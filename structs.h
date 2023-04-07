@@ -38,6 +38,10 @@ struct Car {
 	int id;
 	string marca;
 	string modelo;
+	bool fila = true;
 	bool prioritario = false;
-	int tempo = 1;
+	bool reparado = false;
+	int idet = 0;
+	int temporeparar;
+	int tempoet = 1;
 };

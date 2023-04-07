@@ -8,18 +8,26 @@
 
 using namespace std;
 
+// Create FIFO for a list of Cars waiting to be moved to a ET
+
 struct LEspera {
-	struct Item { 
+	struct Item {
 		Car* car;
-		Item* next;
+		Item* seguinte;
 	};
-	Item* inicio;
+	Item* primeiro;
 };
 
-void addCarToLEspera(LEspera*& LEspera, Car* car);
+void createLEspera(LEspera& f);
 
-void removeCarFromLEspera(LEspera*& LEspera, Car* car);
+void addToLEspera(LEspera& f, Car* car);
 
-void printLEspera(LEspera* LEspera);
+void removeFromLEspera(LEspera& f);
 
-void addCarPriority(LEspera*& LEspera, int ID);
+bool isEmptyLEspera(LEspera& f);
+
+Car firstFromLEspera(LEspera& f);
+
+void printLEspera(LEspera& f);
+
+void addCarPriority(LEspera& f, int ID);

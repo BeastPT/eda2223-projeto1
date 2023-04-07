@@ -6,6 +6,7 @@
 
 #include "structs.h"
 #include "files.h"
+#include "LEspera.h"
 
 using namespace std;
 
@@ -39,11 +40,13 @@ int main(int argc, char* argv[]) {
 	//internalData->providerArray = getContentFromFiles(gardenFilepaths->pathProviders, internalData->sizeofProvider); // Content of file provider to array
 	//internalData->productnameArray = getContentFromFiles(gardenFilepaths->pathProducts, internalData->sizeofProductname); // Content of file product to array
 
-	data->ETs = rand() % 8 + 3; // Number of Gardens the plantation is going to have
+	data->ETs = rand() % 8 + 3; // Number of ETs is going to have
 	cout << "A Oficina tem " << data->ETs << " Estações de Trabalho." << endl;
-	//internalData->numberofProductsToCreate = 15;
 
 	ET* ETsArray = new ET[data->ETs];
+
+	LEspera FilaLEspera = new LEspera;
+
 	//Garden* myplantation = new Garden[internalData->numberofGardens];
 	//Storage* plantationstorage = new Storage;
 
