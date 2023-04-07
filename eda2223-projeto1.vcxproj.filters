@@ -15,13 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="testtttt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="maintete.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <Text Include="marcas.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="modelos.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
