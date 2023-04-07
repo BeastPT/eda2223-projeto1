@@ -21,6 +21,16 @@
   <ItemGroup>
     <Text Include="marcas.txt" />
     <Text Include="modelos.txt" />
+    <Text Include="savedCars.txt" />
+    <Text Include="savedETs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="files.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="files.h" />
+    <ClInclude Include="structs.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
