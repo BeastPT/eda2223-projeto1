@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <locale>
@@ -24,42 +25,42 @@ int main(int argc, char* argv[]) {
 
 	data->sizeMarcas = calculateSizeofFile(filepaths->pathMarcas);
 	data->sizeModelos = calculateSizeofFile(filepaths->pathModelos);
-
+	data->Marca = getContentFromFiles(filepaths->pathMarcas, data->sizeMarcas);
+	data->Modelo = getContentFromFiles(filepaths->pathModelos, data->sizeModelos);
 
 	bool args = argv[1] && argv[2];	// main.exe savedETs.txt savedCars.txt
 
-	filepaths->pathETs = (args == NULL) ? "savedETs.txt" : argv[1];
+	//filepaths->pathETs = (args == NULL) ? "savedETs.txt" : argv[1];
 	// Get Current ETs ID/Size
-	data->ETs = calculateSizeofFile(filepaths->pathETs);
+	//data->ETs = calculateSizeofFile(filepaths->pathETs);
 	
-	filepaths->pathCars = (args == NULL) ? "savedCars.txt" : argv[2];
+	//filepaths->pathCars = (args == NULL) ? "savedCars.txt" : argv[2];
 	// Get Current Cars ID/Size
-	data->Cars = calculateSizeofFile(filepaths->pathCars);
-
-	//internalData->areaArray = getContentFromFiles(gardenFilepaths->pathAreas, internalData->sizeofArea); // Content of file area to array
-	//internalData->providerArray = getContentFromFiles(gardenFilepaths->pathProviders, internalData->sizeofProvider); // Content of file provider to array
-	//internalData->productnameArray = getContentFromFiles(gardenFilepaths->pathProducts, internalData->sizeofProductname); // Content of file product to array
+	//data->Cars = calculateSizeofFile(filepaths->pathCars);
 
 	data->ETs = rand() % 8 + 3; // Number of ETs is going to have
 	cout << "A Oficina tem " << data->ETs << " Estações de Trabalho." << endl;
 
 	ET* ETsArray = new ET[data->ETs];
 
-	LEspera FilaLEspera = new LEspera;
+	LEspera FilaLEspera{};
+	createLEspera(FilaLEspera);
+	for (int i = 0; i < 5; i++)
+	{
+		Car* car = new Car;
+		car->id = i + 1;
+		car->marca = data->Marca[rand() % data->sizeMarcas];
+		//car->marca = "Audi";
+		car->modelo = data->Modelo[rand() % data->sizeModelos];
+		car->temporeparar = rand() % 5 + 2;
+		car->prioritario = (rand() % 100 < 5) ? true : false;
+		addToLEspera(FilaLEspera, car);
+		data->Cars++;
+	}
+	printLEspera(FilaLEspera);
+	cout << endl;
 
-	//Garden* myplantation = new Garden[internalData->numberofGardens];
-	//Storage* plantationstorage = new Storage;
-
-	//inicializeGardens(internalData, myplantation);
-	//getAreasChoosen(internalData, myplantation);
-
-	//plantationstorage->inStorage = inicializeProducts(internalData);
-	//internalData->numberofProductsToCreate = 10;
-
-	//plantationMenu(internalData, myplantation, plantationstorage, gardenFilepaths);
-
-	//delete[] myplantation;
-	//delete internalData;
-	//delete gardenFilepaths;
-	//delete plantationstorage;
+	delete[] ETsArray;
+	delete filepaths;
+	delete data;
 }

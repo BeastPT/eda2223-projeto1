@@ -22,12 +22,16 @@ void createLEspera(LEspera& f);
 
 void addToLEspera(LEspera& f, Car* car);
 
-void removeFromLEspera(LEspera& f);
+int sizeLEspera(LEspera& f);
+
+Car removeFromLEspera(LEspera& f);
 
 bool isEmptyLEspera(LEspera& f);
 
-Car firstFromLEspera(LEspera& f);
-
 void printLEspera(LEspera& f);
+
+void printLEsperaByAlphaOrder(LEspera& f);
+
+void printLEsperaByRepairTime(LEspera& f);
 
 void addCarPriority(LEspera& f, int ID);
