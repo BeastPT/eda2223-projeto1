@@ -1,5 +1,3 @@
-// implement LEspera.h
-
 #include <iostream>
 
 #include "LEspera.h"
@@ -43,16 +41,39 @@ int sizeLEspera(LEspera& f) {
 	return comp;
 }
 
-Car removeFromLEspera(LEspera& f) {
+Car removeFromLEspera(LEspera& f, string marca) {
 	if (f.primeiro == NULL) {
 		throw Car();
 	}
 	else {
 		LEspera::Item* aux = f.primeiro;
-		f.primeiro = f.primeiro->seguinte;
-		aux->car->fila = false;
-		return *aux->car;
-		delete aux;
+		bool found = false;
+		while (aux != NULL) {
+			if (aux->car->prioritario && aux->car->marca == marca) {
+				found = true;
+				break;
+			}
+			aux = aux->seguinte;
+		}
+		if (!found) {
+			aux = f.primeiro;
+			while (aux != NULL) {
+				if (aux->car->marca == marca) {
+					found = true;
+					break;
+				}
+				aux = aux->seguinte;
+			}
+		}
+		if (aux == NULL) {
+			cout << "Carro not found" << endl;
+			throw NULL;
+		}
+		else {
+			aux->car->fila = false;
+			return *aux->car;
+			delete aux;
+		}
 	}
 }
 
@@ -186,21 +207,6 @@ void addCarPriority(LEspera& f, int ID) {
 		while (aux != NULL) {
 			if (aux->car->id == ID) {
 				aux->car->prioritario = true;
-			}
-			aux = aux->seguinte;
-		}
-	}
-}
-
-void addCarPriority(LEspera& f, int repairTime, string Marca, string Modelo) {
-	if (f.primeiro == NULL) {
-		throw Car();
-	}
-	else {
-		LEspera::Item* aux = f.primeiro;
-		while (aux != NULL) {
-			if (aux->car->marca == Marca && aux->car->modelo == Modelo) {
-				aux->car->temporeparar = repairTime;
 			}
 			aux = aux->seguinte;
 		}

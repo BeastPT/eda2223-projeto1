@@ -25,11 +25,13 @@
     <Text Include="savedETs.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ETs.cpp" />
     <ClCompile Include="files.cpp" />
     <ClCompile Include="Lespera.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ETs.h" />
     <ClInclude Include="files.h" />
     <ClInclude Include="LEspera.h" />
     <ClInclude Include="structs.h" />

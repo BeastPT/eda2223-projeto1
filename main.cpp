@@ -8,6 +8,7 @@
 #include "structs.h"
 #include "files.h"
 #include "LEspera.h"
+#include "ETs.h"
 
 using namespace std;
 
@@ -38,27 +39,31 @@ int main(int argc, char* argv[]) {
 	// Get Current Cars ID/Size
 	//data->Cars = calculateSizeofFile(filepaths->pathCars);
 
-	data->ETs = rand() % 8 + 3; // Number of ETs is going to have
+	data->ETs = 2; //rand() % 8 + 3; // Number of ETs is going to have
 	cout << "A Oficina tem " << data->ETs << " Estações de Trabalho." << endl;
 
 	ET* ETsArray = new ET[data->ETs];
 
+	initializeETs(data, ETsArray);
+
+
+	// Create LEspera and add 10 cars to it
 	LEspera FilaLEspera{};
 	createLEspera(FilaLEspera);
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		Car* car = new Car;
 		car->id = i + 1;
 		car->marca = data->Marca[rand() % data->sizeMarcas];
-		//car->marca = "Audi";
 		car->modelo = data->Modelo[rand() % data->sizeModelos];
 		car->temporeparar = rand() % 5 + 2;
-		car->prioritario = (rand() % 100 < 5) ? true : false;
+		car->prioritario = (rand() % 100 < 50) ? true : false; // 100 < 5
 		addToLEspera(FilaLEspera, car);
 		data->Cars++;
 	}
 	printLEspera(FilaLEspera);
 	cout << endl;
+	// End of Create LEspera and add 10 cars to it
 
 	delete[] ETsArray;
 	delete filepaths;

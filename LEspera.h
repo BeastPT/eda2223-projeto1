@@ -17,6 +17,7 @@ struct LEspera {
 	};
 	Item* primeiro;
 };
+char toLower(char c);
 
 void createLEspera(LEspera& f);
 
@@ -24,7 +25,7 @@ void addToLEspera(LEspera& f, Car* car);
 
 int sizeLEspera(LEspera& f);
 
-Car removeFromLEspera(LEspera& f);
+Car removeFromLEspera(LEspera& f, string marca);
 
 bool isEmptyLEspera(LEspera& f);
 
