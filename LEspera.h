@@ -31,8 +31,6 @@ bool isEmptyLEspera(LEspera& f);
 
 void printLEspera(LEspera& f);
 
-void printLEsperaByAlphaOrder(LEspera& f);
-
-void printLEsperaByRepairTime(LEspera& f);
+Car** LEsperaToArray(LEspera& f);
 
 void addCarPriority(LEspera& f, int ID);

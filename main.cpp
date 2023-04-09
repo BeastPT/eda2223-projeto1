@@ -9,6 +9,7 @@
 #include "files.h"
 #include "LEspera.h"
 #include "ETs.h"
+#include "management.h"
 
 using namespace std;
 
@@ -63,7 +64,10 @@ int main(int argc, char* argv[]) {
 	}
 	printLEspera(FilaLEspera);
 	cout << endl;
+	cout << endl;
+	cout << endl;
 	// End of Create LEspera and add 10 cars to it
+	printCars(data, FilaLEspera, ETsArray, true); // print all cars alpha
 
 	delete[] ETsArray;
 	delete filepaths;

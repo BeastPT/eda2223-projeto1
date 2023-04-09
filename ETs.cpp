@@ -24,23 +24,21 @@ void printETs(int ETs, ET* ETsArray) {
 	}
 }
 
-void printETsByAlphaOrder(int ETs, ET* ETsArray) {
-	ET* aux = ETsArray;
-	for (int i = 0; i < ETs - 1; i++) {
-		for (int j = 0; j < ETs - i - 1; j++) {
-			string marca1 = aux[j].marca;
-			string marca2 = aux[j + 1].marca;
-			int k = 0;
-			while (k < marca1.length() && k < marca2.length() && toLower(marca1[k]) == toLower(marca2[k])) {
-				k++;
-			}
-			if (k < marca1.length() && k < marca2.length() && toLower(marca1[k]) > toLower(marca2[k])) {
-				ET temp = aux[j];
-				aux[j] = aux[j + 1];
-				aux[j + 1] = temp;
-			}
+int totalCars(int ETs, ET* ETsArray) {
+	int TotalCars = 0;
+	for (int i = 0; i < ETs; i++) {
+		TotalCars = TotalCars + ETsArray[i].lotacao;
+	}
+	return TotalCars;
+}
+
+Car* ETsCarsArray(int ETs, int TotalCars, ET* ETsArray) {
+	Car* auxx = new Car[TotalCars];
+
+	for (int i = 0; i < ETs; i++) {
+		for (int j = 0; j < ETsArray[i].lotacao; j++) {
+			auxx[j] = ETsArray[i].Reparando[j];
 		}
 	}
-	printETs(ETs, aux);
-	delete[] aux;
+	return auxx;
 }

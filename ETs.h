@@ -5,4 +5,6 @@ void initializeETs(Data* data, ET* ETsArray);
 
 void printETs(int ETs, ET* ETsArray);
 
-void printETsByAlphaOrder(int ETs, ET* ETsArray);
+Car* ETsCarsArray(int ETs, int TotalCars, ET* ETsArray);
+
+int totalCars(int ETs, ET* ETsArray);

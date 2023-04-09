@@ -13,8 +13,6 @@ bool isEmptyLEspera(LEspera& f) {
 	return f.primeiro == NULL;
 }
 
-
-
 void addToLEspera(LEspera& f, Car* car) {
 	LEspera::Item* novo = new LEspera::Item;
 	novo->car = car;
@@ -109,7 +107,7 @@ char toLower(char c) {
 	}
 }
 
-void printLEsperaByAlphaOrder(LEspera& f) {
+Car** LEsperaToArray(LEspera& f) {
 	if (f.primeiro == NULL) {
 		cout << "Lista de espera vazia" << endl;
 	}
@@ -122,79 +120,7 @@ void printLEsperaByAlphaOrder(LEspera& f) {
 			atual = atual->seguinte;
 		}
 
-		//ordena alpha
-		for (int i = 0; i < size - 1; i++) {
-			for (int j = 0; j < size - i - 1; j++) {
-				string marca1 = vec[j]->marca;
-				string marca2 = vec[j + 1]->marca;
-				string modelo1 = vec[j]->modelo;
-				string modelo2 = vec[j + 1]->modelo;
-				int k = 0;
-				int l = 0;
-				while (k < marca1.length() && k < marca2.length() && toLower(marca1[k]) == toLower(marca2[k])) {
-					k++;
-				}
-				if (k < marca1.length() && k < marca2.length() && toLower(marca1[k]) > toLower(marca2[k])) {
-					Car* temp = vec[j];
-					vec[j] = vec[j + 1];
-					vec[j + 1] = temp;
-				}
-				if (marca1 == marca2) {
-					while (l < modelo1.length() && l < modelo2.length() && toLower(modelo1[l]) == toLower(modelo2[l])) {
-						l++;
-					}
-					if (l < modelo1.length() && l < modelo2.length() && toLower(modelo1[l]) > toLower(modelo2[l])) {
-						Car* temp = vec[j];
-						vec[j] = vec[j + 1];
-						vec[j + 1] = temp;
-					}
-				}
-			}
-		}
-
-		for (int i = 0; i < size; i++) {
-			cout << "-------------------------------------" << endl;
-			cout << "Carro: ID: " << vec[i]->id << " | " << vec[i]->marca << "-" << vec[i]->modelo << " | Prioritario: " << ((vec[i]->prioritario) ? "Sim" : "Não") << " | Tempo de reparacao: " << vec[i]->temporeparar << " | Tempo de espera: " << vec[i]->tempoet << endl;
-		}
-
-		delete[] vec;
-
-	}
-}
-
-void printLEsperaByRepairTime(LEspera& f) {
-	if (f.primeiro == NULL) {
-		cout << "Lista de espera vazia" << endl;
-	}
-	else {
-		int size = sizeLEspera(f);
-		Car** vec = new Car * [size];
-		LEspera::Item* atual = f.primeiro;
-		for (int i = 0; i < size; i++) {
-			vec[i] = atual->car;
-			atual = atual->seguinte;
-		}
-
-		//ordena repairtime
-		for (int i = 0; i < size - 1; i++) {
-			for (int j = 0; j < size - i - 1; j++) {
-				int repairTime1 = vec[j]->temporeparar;
-				int repairTime2 = vec[j + 1]->temporeparar;
-				if (repairTime1 > repairTime2) {
-					Car* temp = vec[j];
-					vec[j] = vec[j + 1];
-					vec[j + 1] = temp;
-				}
-			}
-		}
-
-		for (int i = 0; i < size; i++) {
-			cout << "-------------------------------------" << endl;
-			cout << "Carro: ID: " << vec[i]->id << " | " << vec[i]->marca << "-" << vec[i]->modelo << " | Prioritario: " << ((vec[i]->prioritario) ? "Sim" : "Não") << " | Tempo de reparacao: " << vec[i]->temporeparar << " | Tempo de espera: " << vec[i]->tempoet << endl;
-		}
-
-		delete[] vec;
-
+		return vec;
 	}
 }
 
