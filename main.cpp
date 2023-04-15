@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
 	// Get Current Cars ID/Size
 	//data->Cars = calculateSizeofFile(filepaths->pathCars);
 
-	data->ETs = 2; //rand() % 8 + 3; // Number of ETs is going to have
+	data->ETs = rand() % 6 + 3; //rand() % 8 + 3; // Number of ETs is going to have
 	cout << "A Oficina tem " << data->ETs << " Estações de Trabalho." << endl;
 
 	ET* ETsArray = new ET[data->ETs];
@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
 		car->id = i + 1;
 		car->marca = data->Marca[rand() % data->sizeMarcas];
 		car->modelo = data->Modelo[rand() % data->sizeModelos];
-		car->temporeparar = rand() % 5 + 2;
+		car->temporeparar = rand() % 4 + 2;
 		car->prioritario = (rand() % 100 < 50) ? true : false; // 100 < 5
 		addToLEspera(FilaLEspera, car);
 		data->Cars++;

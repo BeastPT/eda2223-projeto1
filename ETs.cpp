@@ -10,7 +10,7 @@ void initializeETs(Data* data, ET* ETsArray) {
 		cout << "Qual será o mecânico para a ET " << i + 1 << "? ";
 		cin >> ETsArray[i].mecanico;
 		ETsArray[i].marca = data->Marca[rand() % data->sizeMarcas];
-		ETsArray[i].capacidade = rand() % 5 + 2;
+		ETsArray[i].capacidade = rand() % 6 + 3;
 	}
 }
 
@@ -42,3 +42,4 @@ Car* ETsCarsArray(int ETs, int TotalCars, ET* ETsArray) {
 	}
 	return auxx;
 }
+
