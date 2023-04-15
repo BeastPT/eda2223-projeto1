@@ -29,6 +29,7 @@ struct ET {
 	int capacidade = 0;
 	int lotacao = 0;
 	int faturacao = 0;
+	int reparados = 0;
 	Car* Reparando = new Car;
 	Car* Reparados = new Car;
 };

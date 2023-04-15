@@ -9,4 +9,4 @@ Car* ETsCarsArray(int ETs, int TotalCars, ET* ETsArray);
 
 int totalCars(int ETs, ET* ETsArray);
 
-void reparaCarros(int ETs, ET* ETsArray );
+void repararCarros(int ETs, ET* ETsArray );

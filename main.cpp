@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 
 	bool args = argv[1] && argv[2];	// main.exe savedETs.txt savedCars.txt
 
-	//filepaths->pathETs = (args == NULL) ? "savedETs.txt" : argv[1];
+	// filepaths->pathETs = (args == NULL) ? "savedETs.txt" : argv[1];
 	// Get Current ETs ID/Size
 	//data->ETs = calculateSizeofFile(filepaths->pathETs);
 	
@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
 	//data->Cars = calculateSizeofFile(filepaths->pathCars);
 
 	data->ETs = rand() % 6 + 3; //rand() % 8 + 3; // Number of ETs is going to have
-	cout << "A Oficina tem " << data->ETs << " Estações de Trabalho." << endl;
+	cout << "A Oficina tem " << data->ETs << " EstaÃ§Ãµes de Trabalho." << endl;
 
 	ET* ETsArray = new ET[data->ETs];
 
@@ -74,5 +74,19 @@ int main(int argc, char* argv[]) {
 	delete data;
 }
 
-	// Ciclo r ao pressionar a tecla ‘s’
+	// Ciclo r ao pressionar a tecla â€˜sâ€™
 
+int dia() {
+	char tecla;
+	while (true) {
+		cout << "Pressione a tecla 's' para simular um dia na OficinaEDA: ";
+		cin >> tecla;
+		if (tecla == 's') {
+			// Colocar aqui o cï¿½digo para simular um dia na oficina
+		}
+		else {
+			break;
+		}
+	}
+	return 0;
+}
