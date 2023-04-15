@@ -43,3 +43,18 @@ Car* ETsCarsArray(int ETs, int TotalCars, ET* ETsArray) {
 	return auxx;
 }
 
+void reparaCarros(int ETs, ET* ETsArray, int dia) {
+	for (int i = 0; i < ETs; i++) {
+		for (int j = 0; j < ETsArray[i].lotacao; j++) {
+			int numerordm = rand() % 100;
+			if (numerordm < 15) {
+				ETsArray[i].Reparando[j] = ETsArray[i].Reparados[j];
+			}
+			else if (dia== ETsArray[i].Reparando[j].temporeparar){
+				
+				cout << "Event did not occur." << endl;
+			}
+		}
+	}
+}
+
