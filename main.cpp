@@ -76,18 +76,3 @@ int main(int argc, char* argv[]) {
 
 	// Ciclo r ao pressionar a tecla ‘s’
 
-int dia() {
-	char tecla;
-	while (true) {
-		cout << "Pressione a tecla 's' para simular um dia na OficinaEDA: ";
-		cin >> tecla;
-		if (tecla == 's') {
-			// Colocar aqui o código para simular um dia na oficina
-		}
-		else {
-			break;
-		}
-	}
-	return 0;
-}
-
