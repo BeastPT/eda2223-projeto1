@@ -29,7 +29,6 @@ struct ET {
 	int capacidade = 0;
 	int lotacao = 0;
 	int faturacao = 0;
-	int reparados = 0;
 	Car* Reparando = new Car;
 	Car* Reparados = new Car;
 };
@@ -41,7 +40,6 @@ struct Data {
 	int sizeModelos = 0;
 	int ETs = 0;
 	int Cars = 0;
-	string* Marcas = new string;
 	ET* ETsArray = new ET;
 	string* CarsArray = new string;
 };
