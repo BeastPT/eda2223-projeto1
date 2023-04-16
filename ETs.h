@@ -10,3 +10,7 @@ Car* ETsCarsArray(int ETs, int TotalCars, ET* ETsArray);
 int totalCars(int ETs, ET* ETsArray);
 
 void reparaCarros(int ETs, ET* ETsArray );
+
+//void display(Data* data, ET* ETsArray);
+
+//void oficinaMenu(int ETs, int TotalCars, Data* data, ET* ETsArray);

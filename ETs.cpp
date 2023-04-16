@@ -32,6 +32,7 @@ int totalCars(int ETs, ET* ETsArray) {
 	return TotalCars;
 }
 
+
 Car* ETsCarsArray(int ETs, int TotalCars, ET* ETsArray) {
 	Car* auxx = new Car[TotalCars];
 
@@ -58,3 +59,44 @@ void reparaCarros(int ETs, ET* ETsArray, int dia) {
 	}
 }
 
+
+/*
+void oficinaMenu(int ETs, Data* data, int TotalCars, ET* ETsArray) {
+	// Variaveis
+	char option = ' ';
+	bool sair = false;
+
+	do {
+		display(data, ETsArray);
+
+
+		cout << " (s)eguinte  ***********  (g)estão  ***********  (0)sair" << endl;
+		cout << "Selecione a sua opção:";
+		cin >> option;
+		cout << endl << "---------------------------------" << endl;
+
+		switch (option) {
+		case 's':
+			 initializeETs( data, ETsArray);
+
+			 printETs( ETs, ETsArray);
+
+			 ETsCarsArray( ETs, TotalCars, ETsArray);
+
+			 totalCars( ETs, ETsArray);
+
+			 reparaCarros( ETs, ETsArray);
+		
+		//CASE G
+
+		case'0':
+			sair = true;
+			break;
+		default:
+			cout << "Inseriu uma opção inválida!" << endl;
+
+			break;
+		}
+	} while (!sair);
+}
+*/

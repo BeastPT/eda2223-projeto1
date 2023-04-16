@@ -65,3 +65,38 @@ void printCars(Data* data, LEspera& f, ET* ETsArray, bool alpha) {
 	delete[] ETsCarArray;
 	delete[] LEsperaArray;
 }
+
+/*
+void managementMenu(Data* data, LEspera& f, ET* ETsArray) {
+	// Variaveis
+	bool sair = false;
+	char opcoes = ' ';
+
+	do {
+		cout << " " << endl;
+		cout << "*****" << " Bem Vindo Gestor " << "*****" << endl;
+		cout << "(1).Reparação Manual" << endl;
+		cout << "(2).Atualizar tempo de reparação" << endl;
+		cout << "(3).Adicionar Prioridade" << endl;
+		cout << "(4).Remover Mecânico" << endl;
+		cout << "(5).Gravar Oficina" << endl;
+		cout << "(6)" << endl;
+		cout << "(7).Carregar Oficina" << endl;
+		cout << "(8).Imprimir Oficina" << endl;
+		cout << "Selecione a sua opcão: ";
+		cin >> opcoes;
+
+		cout << " " << endl;
+		switch (opcoes) {
+			// WRITE 
+		case '0':
+			cout << "Selecionou a opcao sair!" << endl;
+			sair = true;
+			break;
+		default:
+			cout << "Selecione uma opção válida!" << endl;
+		}
+	} while (!sair);
+	cin.ignore();
+}
+*/
