@@ -40,12 +40,12 @@ int main(int argc, char* argv[]) {
 	// Get Current Cars ID/Size
 	//data->Cars = calculateSizeofFile(filepaths->pathCars);
 
-	data->ETs = rand() % 6 + 3; //rand() % 8 + 3; // Number of ETs is going to have
+	data->ETs = rand() % 6 + 3; // Number of ETs is going to have
 	cout << "A Oficina tem " << data->ETs << " Estações de Trabalho." << endl;
+	data->Marcas = new string[data->ETs];
+	data->ETsArray = new ET[data->ETs];
 
-	ET* ETsArray = new ET[data->ETs];
-
-	initializeETs(data, ETsArray);
+	initializeETs(data);
 
 
 	// Create LEspera and add 10 cars to it
@@ -55,21 +55,23 @@ int main(int argc, char* argv[]) {
 	{
 		Car* car = new Car;
 		car->id = i + 1;
-		car->marca = data->Marca[rand() % data->sizeMarcas];
+		car->marca = data->Marcas[rand() % data->ETs];
 		car->modelo = data->Modelo[rand() % data->sizeModelos];
 		car->temporeparar = rand() % 4 + 2;
 		car->prioritario = (rand() % 100 < 50) ? true : false; // 100 < 5
+		car->prioritario = false; //(rand() % 100 < 50) ? true : false; // 100 < 5
 		addToLEspera(FilaLEspera, car);
 		data->Cars++;
 	}
 	printLEspera(FilaLEspera);
 	cout << endl;
+	printETs(data->ETs, data->ETsArray);
 	cout << endl;
-	cout << endl;
-	// End of Create LEspera and add 10 cars to it
-	printCars(data, FilaLEspera, ETsArray, true); // print all cars alpha
+	for (int i = 0; i < 10; i++)
+	{
+		addCarToET(data, FilaLEspera);
+	}
 
-	delete[] ETsArray;
 	delete filepaths;
 	delete data;
 }

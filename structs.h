@@ -41,6 +41,7 @@ struct Data {
 	int sizeModelos = 0;
 	int ETs = 0;
 	int Cars = 0;
+	string* Marcas = new string;
 	ET* ETsArray = new ET;
 	string* CarsArray = new string;
 };

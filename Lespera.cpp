@@ -39,14 +39,14 @@ int sizeLEspera(LEspera& f) {
 	return comp;
 }
 
-Car removeFromLEspera(LEspera& f, string marca) {
+Car removeFromLEsperaByMarca(LEspera& f, string marca) {
 	if (f.primeiro == NULL) {
 		throw Car();
 	}
 	else {
 		LEspera::Item* aux = f.primeiro;
 		bool found = false;
-		while (aux != NULL) {
+		while (aux != NULL) { // procura prioritario + marca
 			if (aux->car->prioritario && aux->car->marca == marca) {
 				found = true;
 				break;
@@ -55,7 +55,7 @@ Car removeFromLEspera(LEspera& f, string marca) {
 		}
 		if (!found) {
 			aux = f.primeiro;
-			while (aux != NULL) {
+			while (aux != NULL) { // procura marca
 				if (aux->car->marca == marca) {
 					found = true;
 					break;
@@ -69,8 +69,66 @@ Car removeFromLEspera(LEspera& f, string marca) {
 		}
 		else {
 			aux->car->fila = false;
-			return *aux->car;
+			Car result = *aux->car;
+			f.primeiro = aux->seguinte;
 			delete aux;
+			return result;
+			
+		}
+	}
+}
+
+bool existsInArray(string* array, int size, string value) {
+	for (int i = 0; i < size; i++) {
+		if (array[i] == value) {
+			return true;
+		}
+	}
+	return false;
+}
+
+Car removeFirstPossibleCar(LEspera& f, string* marcas, int ETs) {
+	if (f.primeiro == NULL) {
+		throw Car();
+	}
+	else {
+		LEspera::Item* prevaux = nullptr;
+		LEspera::Item* aux = f.primeiro;
+		bool found = false;
+		while (aux != NULL) { // procura carro prioritario
+			if (aux->car->prioritario && existsInArray(marcas, ETs, aux->car->marca)) {
+				found = true;
+				break;
+			}
+			prevaux = aux;
+			aux = aux->seguinte;
+		}
+		if (!found) {
+			prevaux = nullptr;
+			aux = f.primeiro;
+			while (aux != NULL) { // procura carro
+				if (existsInArray(marcas, ETs, aux->car->marca)) {
+					found = true;
+					break;
+				}
+				prevaux = aux;
+				aux = aux->seguinte;
+			}
+		}
+		if (aux == NULL) {
+			throw Car();
+		}
+		else {
+			aux->car->fila = false;
+			Car result = *aux->car;
+			if (prevaux == nullptr) {
+				f.primeiro = aux->seguinte;
+			}
+			else {
+				prevaux->seguinte = aux->seguinte;
+			}
+			delete aux;
+			return result;
 		}
 	}
 }
@@ -110,6 +168,7 @@ char toLower(char c) {
 Car** LEsperaToArray(LEspera& f) {
 	if (f.primeiro == NULL) {
 		cout << "Lista de espera vazia" << endl;
+		return NULL;
 	}
 	else {
 		int size = sizeLEspera(f);
