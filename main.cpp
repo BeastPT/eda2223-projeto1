@@ -73,3 +73,6 @@ int main(int argc, char* argv[]) {
 	delete filepaths;
 	delete data;
 }
+
+	// Ciclo r ao pressionar a tecla ‘s’
+
