@@ -25,7 +25,11 @@ void addToLEspera(LEspera& f, Car* car);
 
 int sizeLEspera(LEspera& f);
 
-Car removeFromLEspera(LEspera& f, string marca);
+Car removeFromLEsperaByMarca(LEspera& f, string marca);
+
+Car removeFirstPossibleCar(LEspera& f, string* marcas, int ETs);
+
+Car firstFromLEspera(LEspera& f);
 
 bool isEmptyLEspera(LEspera& f);
 
