@@ -95,10 +95,3 @@ void cloneCarArray(Car* Cars1, Car* FinalCars, int size) {
 		FinalCars[i] = Cars1[i];
 	}
 }
-
-void repararCarros(int ETs, ET* ETsArray) {
-	for (int i = 0; i < ETs; i++) {
-
-	}
-}
-

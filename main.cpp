@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
 
 	ET* ETsArray = new ET[data->ETs];
 
-	initializeETs(data, ETsArray);
+	initializeETs(data);
 
 
 	// Create LEspera and add 10 cars to it
@@ -73,6 +73,3 @@ int main(int argc, char* argv[]) {
 	delete filepaths;
 	delete data;
 }
-
-	// Ciclo r ao pressionar a tecla ‘s’
-
