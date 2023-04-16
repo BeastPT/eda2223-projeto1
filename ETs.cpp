@@ -59,7 +59,7 @@ void addCarToET(Data* data, LEspera& f) {
 	catch (Car car) {
 		return;
 	}
-	cout << "Car ID: " << car.id << endl;
+	//cout << "Car ID: " << car.id << endl;
 	for (int j = 0; j < data->ETs; j++) {
 		if (data->ETsArray[j].marca == car.marca) {
 			car.idet = j;

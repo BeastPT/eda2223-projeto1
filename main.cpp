@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,18 +32,18 @@ int main(int argc, char* argv[]) {
 
 	bool args = argv[1] && argv[2];	// main.exe savedETs.txt savedCars.txt
 
-	//filepaths->pathETs = (args == NULL) ? "savedETs.txt" : argv[1];
+	// filepaths->pathETs = (args == NULL) ? "savedETs.txt" : argv[1];
 	// Get Current ETs ID/Size
 	//data->ETs = calculateSizeofFile(filepaths->pathETs);
-	
+
 	//filepaths->pathCars = (args == NULL) ? "savedCars.txt" : argv[2];
 	// Get Current Cars ID/Size
 	//data->Cars = calculateSizeofFile(filepaths->pathCars);
 
-	data->ETs = rand() % 6 + 3; //rand() % 8 + 3; // Number of ETs is going to have
-	cout << "A Oficina tem " << data->ETs << " Esta��es de Trabalho." << endl;
-
-	ET* ETsArray = new ET[data->ETs];
+	data->ETs = rand() % 6 + 3; // Number of ETs is going to have
+	cout << "A Oficina tem " << data->ETs << " Estações de Trabalho." << endl;
+	data->Marcas = new string[data->ETs];
+	data->ETsArray = new ET[data->ETs];
 
 	initializeETs(data);
 
@@ -55,21 +55,42 @@ int main(int argc, char* argv[]) {
 	{
 		Car* car = new Car;
 		car->id = i + 1;
-		car->marca = data->Marca[rand() % data->sizeMarcas];
+		car->marca = data->Marcas[rand() % data->ETs];
 		car->modelo = data->Modelo[rand() % data->sizeModelos];
 		car->temporeparar = rand() % 4 + 2;
 		car->prioritario = (rand() % 100 < 50) ? true : false; // 100 < 5
+		car->prioritario = false; //(rand() % 100 < 50) ? true : false; // 100 < 5
 		addToLEspera(FilaLEspera, car);
 		data->Cars++;
 	}
 	printLEspera(FilaLEspera);
 	cout << endl;
+	printETs(data->ETs, data->ETsArray);
 	cout << endl;
-	cout << endl;
-	// End of Create LEspera and add 10 cars to it
-	printCars(data, FilaLEspera, ETsArray, true); // print all cars alpha
+	for (int i = 0; i < 10; i++)
+	{
+		addCarToET(data, FilaLEspera);
+	}
 
-	delete[] ETsArray;
+	printETs(data->ETs, data->ETsArray);
+
 	delete filepaths;
 	delete data;
+}
+
+// Ciclo r ao pressionar a tecla ‘s’
+
+int dia() {
+	char tecla;
+	while (true) {
+		cout << "Pressione a tecla 's' para simular um dia na OficinaEDA: ";
+		cin >> tecla;
+		if (tecla == 's') {
+			// Colocar aqui o c�digo para simular um dia na oficina
+		}
+		else {
+			break;
+		}
+	}
+	return 0;
 }
