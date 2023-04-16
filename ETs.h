@@ -11,3 +11,5 @@ Car* ETsCarsArray(int ETs, int TotalCars, ET* ETsArray);
 void addCarToET(Data* data, LEspera& f);
 
 int totalCars(int ETs, ET* ETsArray);
+
+void repararcarro(int ETs, ET* ETsArray);

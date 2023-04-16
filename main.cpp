@@ -74,6 +74,13 @@ int main(int argc, char* argv[]) {
 
 	printETs(data->ETs, data->ETsArray);
 
+	for (int i = 0; i < 5; i++) {
+		cout << "--------------------- " << endl;
+		repararcarro(data->ETs,data->ETsArray);
+	}
+
+	printCars(data, FilaLEspera, data->ETsArray, true);
+
 	delete filepaths;
 	delete data;
 }

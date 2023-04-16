@@ -95,3 +95,34 @@ void cloneCarArray(Car* Cars1, Car* FinalCars, int size) {
 		FinalCars[i] = Cars1[i];
 	}
 }
+
+void adreparados(ET* ETsArray, Car car, int x) {
+	Car* reparados = new Car[ETsArray[x].reparados + 1];
+	cloneCarArray(ETsArray[x].Reparados, reparados, ETsArray[x].reparados);
+	car.reparado = true;
+	reparados[ETsArray[x].reparados++] = car;
+	ETsArray[x].Reparados = reparados;
+	cout << ETsArray[x].reparados << endl;
+}
+
+void repararcarro(int ETs, ET* ETsArray) {
+	for (int i = 0; i < ETs; i++) {
+		Car* reparando = new Car[ETsArray[i].capacidade];
+		int aux = 0;
+		for (int j = 0; j < ETsArray[i].lotacao; j++) {
+			Car car = ETsArray[i].Reparando[j];
+			cout << car.marca << endl;
+			if ((rand() % 100 <= 15) || car.temporeparar == car.tempoet) {
+				cout << "bom dia" << endl;
+				adreparados(ETsArray, car, i);
+				cout << car.id << endl;
+			}
+			else {
+				car.tempoet++;
+				reparando[aux++] = car;
+			}
+		}
+		ETsArray[i].Reparando = reparando;
+		delete[] reparando;
+	}
+}
