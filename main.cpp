@@ -51,18 +51,8 @@ int main(int argc, char* argv[]) {
 	// Create LEspera and add 10 cars to it
 	LEspera FilaLEspera{};
 	createLEspera(FilaLEspera);
-	for (int i = 0; i < 10; i++)
-	{
-		Car* car = new Car;
-		car->id = i + 1;
-		car->marca = data->Marcas[rand() % data->ETs];
-		car->modelo = data->Modelo[rand() % data->sizeModelos];
-		car->temporeparar = rand() % 4 + 2;
-		car->prioritario = (rand() % 100 < 50) ? true : false; // 100 < 5
-		car->prioritario = false; //(rand() % 100 < 50) ? true : false; // 100 < 5
-		addToLEspera(FilaLEspera, car);
-		data->Cars++;
-	}
+	createCarLEspera(data, FilaLEspera, 10);
+
 	printLEspera(FilaLEspera);
 	cout << endl;
 	printETs(data->ETs, data->ETsArray);
@@ -74,12 +64,8 @@ int main(int argc, char* argv[]) {
 
 	printETs(data->ETs, data->ETsArray);
 
-	for (int i = 0; i < 5; i++) {
-		cout << "--------------------- " << endl;
-		repararcarro(data->ETs,data->ETsArray);
-	}
-
-	printCars(data, FilaLEspera, data->ETsArray, true);
+	//printCars(data, FilaLEspera, data->ETsArray, true);
+	printETs(data->ETs, data->ETsArray);
 
 	delete filepaths;
 	delete data;
@@ -87,17 +73,17 @@ int main(int argc, char* argv[]) {
 
 // Ciclo r ao pressionar a tecla ‘s’
 
-int dia() {
+void dia(Data* data, LEspera& FilaLEspera) {
 	char tecla;
 	while (true) {
 		cout << "Pressione a tecla 's' para simular um dia na OficinaEDA: ";
 		cin >> tecla;
 		if (tecla == 's') {
-			// Colocar aqui o c�digo para simular um dia na oficina
+			createCarLEspera(data, FilaLEspera, 10);
+			repararCarros(data->ETs, data->ETsArray);
 		}
 		else {
 			break;
 		}
 	}
-	return 0;
 }

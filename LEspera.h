@@ -21,6 +21,8 @@ char toLower(char c);
 
 void createLEspera(LEspera& f);
 
+void createCarLEspera(Data* data, LEspera& f, int amount);
+
 void addToLEspera(LEspera& f, Car* car);
 
 int sizeLEspera(LEspera& f);

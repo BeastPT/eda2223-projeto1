@@ -13,6 +13,21 @@ bool isEmptyLEspera(LEspera& f) {
 	return f.primeiro == NULL;
 }
 
+void createCarLEspera(Data* data, LEspera& f, int amount) {
+	for (int i = 0; i < amount; i++)
+	{
+		Car* car = new Car;
+		car->id = i + 1;
+		car->marca = data->Marcas[rand() % data->ETs];
+		car->modelo = data->Modelo[rand() % data->sizeModelos];
+		car->temporeparar = rand() % 4 + 2;
+		car->prioritario = (rand() % 100 < 50) ? true : false; // 100 < 5
+		car->prioritario = false; //(rand() % 100 < 50) ? true : false; // 100 < 5
+		addToLEspera(f, car);
+		data->Cars++;
+	}
+}
+
 void addToLEspera(LEspera& f, Car* car) {
 	LEspera::Item* novo = new LEspera::Item;
 	novo->car = car;

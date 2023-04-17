@@ -26,7 +26,7 @@ void initializeETs(Data* data) {
 		data->ETsArray[i].id = i + 1;
 		cout << "Qual será o mecânico para a ET " << i + 1 << "? ";
 		cin >> data->ETsArray[i].mecanico;
-		string marca = getUnusedMarca(data, data->Marcas, i);
+		string marca = getUnusedMarca(data, data->Marca, i);
 		data->ETsArray[i].marca = marca;
 		data->Marcas[i] = marca;
 		data->ETsArray[i].capacidade = rand() % 6 + 3;
@@ -96,33 +96,33 @@ void cloneCarArray(Car* Cars1, Car* FinalCars, int size) {
 	}
 }
 
-void adreparados(ET* ETsArray, Car car, int x) {
-	Car* reparados = new Car[ETsArray[x].reparados + 1];
+void addReparados(ET* ETsArray, Car car, int x) {
+	ETsArray[x].reparados++;
+	ETsArray[x].faturacao += 100;
+	Car* reparados = new Car[ETsArray[x].reparados+1];
 	cloneCarArray(ETsArray[x].Reparados, reparados, ETsArray[x].reparados);
 	car.reparado = true;
-	reparados[ETsArray[x].reparados++] = car;
+	reparados[ETsArray[x].reparados] = car;
 	ETsArray[x].Reparados = reparados;
-	cout << ETsArray[x].reparados << endl;
 }
 
-void repararcarro(int ETs, ET* ETsArray) {
+void repararCarros(int ETs, ET* ETsArray) {
 	for (int i = 0; i < ETs; i++) {
 		Car* reparando = new Car[ETsArray[i].capacidade];
 		int aux = 0;
-		for (int j = 0; j < ETsArray[i].lotacao; j++) {
+		int aux2 = ETsArray[i].lotacao;
+		for (int j = 0; j < aux2; j++) {
 			Car car = ETsArray[i].Reparando[j];
-			cout << car.marca << endl;
 			if ((rand() % 100 <= 15) || car.temporeparar == car.tempoet) {
-				cout << "bom dia" << endl;
-				adreparados(ETsArray, car, i);
-				cout << car.id << endl;
+				addReparados(ETsArray, car, i);
+				ETsArray[i].lotacao--;
 			}
 			else {
 				car.tempoet++;
 				reparando[aux++] = car;
 			}
 		}
+		delete[] ETsArray[i].Reparando;
 		ETsArray[i].Reparando = reparando;
-		delete[] reparando;
 	}
 }
