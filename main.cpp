@@ -62,7 +62,10 @@ int main(int argc, char* argv[]) {
 		addCarToET(data, FilaLEspera);
 	}
 
+
 	printETs(data->ETs, data->ETsArray);
+
+	repararManual(data->ETs, data->ETsArray);
 
 	//printCars(data, FilaLEspera, data->ETsArray, true);
 	printETs(data->ETs, data->ETsArray);

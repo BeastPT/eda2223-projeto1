@@ -126,3 +126,27 @@ void repararCarros(int ETs, ET* ETsArray) {
 		ETsArray[i].Reparando = reparando;
 	}
 }
+
+void repararManual(int ETs, ET* ETsArray) {
+	string marcarm, modelorm;
+	for (int i = 0; i < ETs; i++) {
+		Car* reparando = new Car[ETsArray[i].capacidade];
+		cout << "Qual a marca do carro que quer reparar" << endl;
+		cin >> marcarm;
+		if (ETsArray[i].marca == marcarm) {
+			for (int j = 0; j < ETsArray[i].lotacao; j++) {
+				Car car = ETsArray[i].Reparando[j];
+				cout << "Qual o modelo do carro que quer reparar" << endl;
+				cin >> modelorm;
+				if (car.modelo == modelorm) {
+					addReparados(ETsArray, car, i);
+					ETsArray[i].lotacao--;
+				}
+				else
+					break;
+			}
+			delete[] ETsArray[i].Reparando;
+			ETsArray[i].Reparando = reparando;
+		}
+	}
+}
