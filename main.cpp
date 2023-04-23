@@ -98,7 +98,7 @@ int main(int argc, char* argv[]) {
 			switch (opcao) {
 			case 1:
 				repararManual(data->ETs, data->ETsArray);
-				//printETs(data->ETs, data->ETsArray);
+				printETs(data->ETs, data->ETsArray);
 				break;
 			}
 
