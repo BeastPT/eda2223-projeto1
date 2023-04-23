@@ -136,31 +136,29 @@ void repararManual(int ETs, ET* ETsArray) {
 	int aux = -1;
 	int aux2 = -1;
 	for (int i = 0; i < ETs; i++) {
+		cout << "ola" << endl;
 		if (ETsArray[i].marca == marcarm) {
 			aux = i;
 			break;
 		}
-		for (int j = 0; j < ETsArray[aux].lotacao; j++) {
-			if (ETsArray[aux].Reparando[j].modelo == modelorm) {
-				aux2 = j;
-				break;
-			}
-		}
-		int aux3 = ETsArray[aux].lotacao;
-		if (aux != -1 && aux2 != -1) {
-			addReparados(ETsArray, ETsArray[aux].Reparando[aux2], aux);
-			for (int i = aux2; i < aux3 - 1; i++) {
-				ETsArray[aux].Reparando[i] = ETsArray[aux].Reparando[i + 1];
-			}
-
-			// Ajusta o tamanho do vetor de quantidades para refletir a remoção do item
-			ETsArray[aux].lotacao = 0;
-
+	}
+	for (int j = 0; j < ETsArray[aux].lotacao; j++) {
+		if (ETsArray[aux].Reparando[j].modelo == modelorm) {
+			aux2 = j;
+			break;
 		}
 	}
-	//cout << ETsArray[aux] << endl;
+	int aux3 = ETsArray[aux].lotacao;
+	if (aux != -1 && aux2 != -1) {
+		addReparados(ETsArray, ETsArray[aux].Reparando[aux2], aux);
+		for (int i = aux2; i < aux3 - 1; i++) {
+			ETsArray[aux].Reparando[i] = ETsArray[aux].Reparando[i + 1];
+		}
+		ETsArray[aux].lotacao--;
+	}
+	cout << ETsArray[aux].marca << endl;
 	cout << ETsArray[aux].lotacao << endl;
-	//cout << ETsArray[aux].Reparando[aux2] << endl;
+	cout << ETsArray[aux].Reparando[aux2].modelo << endl;
 }
 	
 	
