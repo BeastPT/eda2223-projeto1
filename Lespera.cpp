@@ -212,3 +212,27 @@ void addCarPriority(LEspera& f, int ID) {
 		}
 	}
 }
+
+void Atreparacao(LEspera& f) {
+	string marcaat, modelat;
+	int trep;
+	cout << "Qual a marca que pretende :" << endl;
+	cin >> marcaat;
+	cout << "Qual o modelo que pretende :" << endl;
+	cin >> modelat;
+	cout << "Qual o tempo que pretende para a reparação (2 a 5):" << endl;
+	cin >> trep;
+	if (f.primeiro == NULL) 
+		cout << "Lista de espera vazia" << endl;
+	else {
+		LEspera::Item* aux = f.primeiro;
+		while (aux != NULL) {
+			if (aux->car->marca == marcaat && aux->car->modelo == modelat) {
+				aux->car->temporeparar = trep;
+				aux = aux->seguinte;
+			}
+			else
+				aux = aux->seguinte;
+		}
+	}
+}

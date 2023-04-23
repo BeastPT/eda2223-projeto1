@@ -68,8 +68,6 @@ int main(int argc, char* argv[]) {
 
 	char letra;
 	int opcao;
-	//cout << "Pressione a letra 's' se quiser simular, ou então a letra 'g' se quiser aceder a gestão :" << endl;
-	//cin >> letra;
 	while (true){
 		cout << "Pressione a letra 's' se quiser simular, ou então a letra 'g' se quiser aceder a gestão :" << endl;
 		cin >> letra;
@@ -100,8 +98,10 @@ int main(int argc, char* argv[]) {
 				repararManual(data->ETs, data->ETsArray);
 				printETs(data->ETs, data->ETsArray);
 				break;
+			case 2:
+				printCars(data, FilaLEspera, data->ETsArray, true);
+				Atreparacao(FilaLEspera);
 			}
-
 		}
 		else
 			break;
@@ -109,9 +109,6 @@ int main(int argc, char* argv[]) {
 
 
 	printCars(data, FilaLEspera, data->ETsArray, true);
-	//repararManual(data->ETs, data->ETsArray);
-
-	//printETs(data->ETs, data->ETsArray);
 
 	delete filepaths;
 	delete data;

@@ -113,7 +113,7 @@ void repararCarros(int ETs, ET* ETsArray) {
 		int aux2 = ETsArray[i].lotacao;
 		for (int j = 0; j < aux2; j++) {
 			Car car = ETsArray[i].Reparando[j];
-			if ((rand() % 100 <= 15) || car.temporeparar == car.tempoet) {
+			if ((rand() % 100 <= 15) || car.temporeparar <= car.tempoet) {
 				addReparados(ETsArray, car, i);
 				ETsArray[i].lotacao--;
 			}
@@ -156,6 +156,8 @@ void repararManual(int ETs, ET* ETsArray) {
 		ETsArray[aux].lotacao--;
 	}
 }
+
+
 	
 	
 	

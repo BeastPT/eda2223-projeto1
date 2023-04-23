@@ -40,3 +40,5 @@ void printLEspera(LEspera& f);
 Car** LEsperaToArray(LEspera& f);
 
 void addCarPriority(LEspera& f, int ID);
+
+void Atreparacao(LEspera& f);
