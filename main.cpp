@@ -65,6 +65,7 @@ int main(int argc, char* argv[]) {
 
 	printETs(data->ETs, data->ETsArray);
 
+
 	char letra;
 	int opcao;
 	//cout << "Pressione a letra 's' se quiser simular, ou então a letra 'g' se quiser aceder a gestão :" << endl;
@@ -97,6 +98,7 @@ int main(int argc, char* argv[]) {
 			switch (opcao) {
 			case 1:
 				repararManual(data->ETs, data->ETsArray);
+				//printETs(data->ETs, data->ETsArray);
 				break;
 			}
 
@@ -104,25 +106,7 @@ int main(int argc, char* argv[]) {
 		else
 			break;
 	}
-	//if(letra== 'g'){
-	//	cout << "**** Bem vindo Gestor ****" << endl;
-	//	cout << "1 - Reparação Manual " << endl;
-	//	cout << "2 - Atualizar tempo de reparação" << endl;
-	//	cout << "3 - Adicionar prioridade" << endl;
-	//	cout << "4 - Remover mecanico" << endl;
-	//	cout << "5 - Gravar oficina" << endl;
-	//	cout << "6 - Carregar oficina" << endl;
-	//	cout << "7 - Imprimir oficina" << endl;
-	//	cout << "Escolha uma oppcao: " << endl;
 
-	//	cin >> opcao;
-	//	switch (opcao) {
-	//	case 1:
-	//		repararManual(data->ETs, data->ETsArray);
-	//		break;
-	//	}
-
-	//}
 
 	printCars(data, FilaLEspera, data->ETsArray, true);
 	//repararManual(data->ETs, data->ETsArray);
@@ -133,19 +117,3 @@ int main(int argc, char* argv[]) {
 	delete data;
 }
 
-// Ciclo r ao pressionar a tecla ‘s’
-
-void dia(Data* data, LEspera& FilaLEspera) {
-	char tecla;
-	while (true) {
-		cout << "Pressione a tecla 's' para simular um dia na OficinaEDA: ";
-		cin >> tecla;
-		if (tecla == 's') {
-			createCarLEspera(data, FilaLEspera, 10);
-			repararCarros(data->ETs, data->ETsArray);
-		}
-		else {
-			break;
-		}
-	}
-}

@@ -138,21 +138,29 @@ void repararManual(int ETs, ET* ETsArray) {
 	for (int i = 0; i < ETs; i++) {
 		if (ETsArray[i].marca == marcarm) {
 			aux = i;
+			break;
 		}
-		for (int j = 0; j < ETsArray[i].lotacao; j++) {
-			if (ETsArray[i].Reparando[j].modelo == modelorm) {
+		for (int j = 0; j < ETsArray[aux].lotacao; j++) {
+			if (ETsArray[aux].Reparando[j].modelo == modelorm) {
 				aux2 = j;
 				break;
 			}
 		}
-	}
-	if (aux != -1 && aux2 != -1) {
-		addReparados(ETsArray, ETsArray[aux].Reparando[aux2], aux);
-		for (int i = aux2; i < ETsArray[i].lotacao - 1; i++) {
-			ETsArray[aux].Reparando[i] = ETsArray[aux].Reparando[i + 1];
+		int aux3 = ETsArray[aux].lotacao;
+		if (aux != -1 && aux2 != -1) {
+			addReparados(ETsArray, ETsArray[aux].Reparando[aux2], aux);
+			for (int i = aux2; i < aux3 - 1; i++) {
+				ETsArray[aux].Reparando[i] = ETsArray[aux].Reparando[i + 1];
+			}
+
+			// Ajusta o tamanho do vetor de quantidades para refletir a remoção do item
+			ETsArray[aux].lotacao = 0;
+
 		}
-		ETsArray[aux].lotacao--;
 	}
+	//cout << ETsArray[aux] << endl;
+	cout << ETsArray[aux].lotacao << endl;
+	//cout << ETsArray[aux].Reparando[aux2] << endl;
 }
 	
 	
