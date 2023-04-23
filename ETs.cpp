@@ -129,24 +129,48 @@ void repararCarros(int ETs, ET* ETsArray) {
 
 void repararManual(int ETs, ET* ETsArray) {
 	string marcarm, modelorm;
+	cout << "Qual a marca do carro que quer reparar" << endl;
+	cin >> marcarm;
+	cout << "Qual o modelo do carro que quer reparar" << endl;
+	cin >> modelorm;
+	int aux = -1;
+	int aux2 = -1;
 	for (int i = 0; i < ETs; i++) {
-		Car* reparando = new Car[ETsArray[i].capacidade];
-		cout << "Qual a marca do carro que quer reparar" << endl;
-		cin >> marcarm;
 		if (ETsArray[i].marca == marcarm) {
-			for (int j = 0; j < ETsArray[i].lotacao; j++) {
-				Car car = ETsArray[i].Reparando[j];
-				cout << "Qual o modelo do carro que quer reparar" << endl;
-				cin >> modelorm;
-				if (car.modelo == modelorm) {
-					addReparados(ETsArray, car, i);
-					ETsArray[i].lotacao--;
-				}
-				else
-					break;
+			aux = i;
+		}
+		for (int j = 0; j < ETsArray[i].lotacao; j++) {
+			if (ETsArray[i].Reparando[j].modelo == modelorm) {
+				aux2 = j;
+				break;
 			}
-			delete[] ETsArray[i].Reparando;
-			ETsArray[i].Reparando = reparando;
 		}
 	}
+	if (aux != -1 && aux2 != -1) {
+		addReparados(ETsArray, ETsArray[aux].Reparando[aux2], aux);
+		for (int i = aux2; i < ETsArray[i].lotacao - 1; i++) {
+			ETsArray[aux].Reparando[i] = ETsArray[aux].Reparando[i + 1];
+		}
+		ETsArray[aux].lotacao--;
+	}
 }
+	
+	
+	
+//	for (int i = aux; i < ETs; i++) {
+//		Car* reparando = new Car[ETsArray[i].capacidade];
+//			for (int j = 0; j < ETsArray[i].lotacao; j++) {
+//				Car car = ETsArray[i].Reparando[j];
+//				cout << "Qual o modelo do carro que quer reparar" << endl;
+//				cin >> modelorm;
+//				if (car.modelo == modelorm) {
+//					addReparados(ETsArray, car, i);
+//					ETsArray[i].lotacao--;
+//				}
+//				else
+//					break;
+//			}
+//			delete[] ETsArray[i].Reparando;
+//			ETsArray[i].Reparando = reparando;
+//		}
+//}

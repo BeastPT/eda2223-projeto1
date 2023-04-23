@@ -65,10 +65,69 @@ int main(int argc, char* argv[]) {
 
 	printETs(data->ETs, data->ETsArray);
 
-	repararManual(data->ETs, data->ETsArray);
+	char letra;
+	int opcao;
+	//cout << "Pressione a letra 's' se quiser simular, ou então a letra 'g' se quiser aceder a gestão :" << endl;
+	//cin >> letra;
+	while (true){
+		cout << "Pressione a letra 's' se quiser simular, ou então a letra 'g' se quiser aceder a gestão :" << endl;
+		cin >> letra;
+		if (letra == 's') {
+			createCarLEspera(data, FilaLEspera, 10);
+			repararCarros(data->ETs, data->ETsArray);
+			for (int i = 0; i < 10; i++)
+			{
+				addCarToET(data, FilaLEspera);
+			}
+			printETs(data->ETs, data->ETsArray);
+			//printCars(data, FilaLEspera, data->ETsArray, true);
+		}
+		else if (letra == 'g') {
+			cout << "**** Bem vindo Gestor ****" << endl;
+			cout << "1 - Reparação Manual " << endl;
+			cout << "2 - Atualizar tempo de reparação" << endl;
+			cout << "3 - Adicionar prioridade" << endl;
+			cout << "4 - Remover mecanico" << endl;
+			cout << "5 - Gravar oficina" << endl;
+			cout << "6 - Carregar oficina" << endl;
+			cout << "7 - Imprimir oficina" << endl;
+			cout << "Escolha uma oppcao: " << endl;
 
-	//printCars(data, FilaLEspera, data->ETsArray, true);
-	printETs(data->ETs, data->ETsArray);
+			cin >> opcao;
+			switch (opcao) {
+			case 1:
+				repararManual(data->ETs, data->ETsArray);
+				break;
+			}
+
+		}
+		else
+			break;
+	}
+	//if(letra== 'g'){
+	//	cout << "**** Bem vindo Gestor ****" << endl;
+	//	cout << "1 - Reparação Manual " << endl;
+	//	cout << "2 - Atualizar tempo de reparação" << endl;
+	//	cout << "3 - Adicionar prioridade" << endl;
+	//	cout << "4 - Remover mecanico" << endl;
+	//	cout << "5 - Gravar oficina" << endl;
+	//	cout << "6 - Carregar oficina" << endl;
+	//	cout << "7 - Imprimir oficina" << endl;
+	//	cout << "Escolha uma oppcao: " << endl;
+
+	//	cin >> opcao;
+	//	switch (opcao) {
+	//	case 1:
+	//		repararManual(data->ETs, data->ETsArray);
+	//		break;
+	//	}
+
+	//}
+
+	printCars(data, FilaLEspera, data->ETsArray, true);
+	//repararManual(data->ETs, data->ETsArray);
+
+	//printETs(data->ETs, data->ETsArray);
 
 	delete filepaths;
 	delete data;
