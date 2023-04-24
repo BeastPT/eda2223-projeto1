@@ -211,6 +211,21 @@ void addCarPriority(LEspera& f, int ID) {
 	}
 }
 
+void deleteLEspera(LEspera& f) {
+	if (f.primeiro == NULL) {
+		cout << "Lista de espera vazia deleteLEspera" << endl;
+	}
+	else {
+		LEspera::Item* aux = f.primeiro;
+		while (aux != NULL) {
+			LEspera::Item* temp = aux;
+			aux = aux->seguinte;
+			delete temp;
+		}
+		f.primeiro = NULL;
+	}
+}
+
 void Atreparacao(LEspera& f) {
 	string marcaat, modelat;
 	int trep;

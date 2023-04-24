@@ -1,4 +1,3 @@
-ID_OFICINA MECANICO MARCA CAPACIDADE LOTACAO FATURACAO
-
-1 Janrique Opel 3 2 1100
-2 Nuninho Fiat 2 1 700
+1 a Lamborghini 5 5 3 300
+2 b Audi 5 5 5 500
+3 c Mitsubishi 3 3 4 400

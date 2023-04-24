@@ -111,6 +111,17 @@ int main(int argc, char* argv[]) {
 			case 5:
 				saveCars(FilaLEspera, data, filepaths);
 				saveETs(data, filepaths);
+				cout << "Oficina guardada com sucesso!" << endl;
+				break;
+			case 6:
+				delete[] data->Marcas;
+				delete[] data->ETsArray;
+				deleteLEspera(FilaLEspera);
+				cout << "1111" << endl;
+				loadETs(data, filepaths);
+				cout << "2222" << endl;
+				loadCars(FilaLEspera, data, filepaths);
+				cout << "Oficina carregada com sucesso!" << endl;
 				break;
 			case 7:
 				cout << "**** Oficina ****" << endl;

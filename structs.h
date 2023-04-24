@@ -43,5 +43,5 @@ struct Data {
 	int Cars = 0;
 	string* Marcas = new string;
 	ET* ETsArray = new ET;
-	string* CarsArray = new string;
+	//string* CarsArray = new string;
 };
