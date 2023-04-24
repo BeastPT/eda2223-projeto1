@@ -32,7 +32,9 @@ int main(int argc, char* argv[]) {
 
 	bool args = argv[1] && argv[2];	// main.exe savedETs.txt savedCars.txt
 
-	// filepaths->pathETs = (args == NULL) ? "savedETs.txt" : argv[1];
+	//filepaths->pathETs = (args == NULL) ? "savedETs.txt" : argv[1];
+	filepaths->pathETs = "savedETs.txt";
+	filepaths->pathCars = "savedCars.txt";
 	// Get Current ETs ID/Size
 	//data->ETs = calculateSizeofFile(filepaths->pathETs);
 
@@ -106,7 +108,10 @@ int main(int argc, char* argv[]) {
 			case 4:
 				removerMecanico(data->ETs, data->ETsArray, FilaLEspera);
 				break;
-
+			case 5:
+				saveCars(FilaLEspera, data, filepaths);
+				saveETs(data, filepaths);
+				break;
 			case 7:
 				cout << "**** Oficina ****" << endl;
 				cout << "1. Mostrar por ordem Alfabética" << endl;
@@ -117,6 +122,9 @@ int main(int argc, char* argv[]) {
 					printCars(data, FilaLEspera, data->ETsArray, true);
 				else
 					printCars(data, FilaLEspera, data->ETsArray, false);
+				break;
+			default:
+				cout << "Opção inexistente" << endl;
 				break;
 
 

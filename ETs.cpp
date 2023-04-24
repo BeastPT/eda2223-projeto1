@@ -98,10 +98,10 @@ void cloneCarArray(Car* Cars1, Car* FinalCars, int size) {
 void addReparados(ET* ETsArray, Car car, int x) {
 	ETsArray[x].reparados++;
 	ETsArray[x].faturacao += 100;
-	Car* reparados = new Car[ETsArray[x].reparados+1];
+	Car* reparados = new Car[ETsArray[x].reparados + 1];
 	cloneCarArray(ETsArray[x].Reparados, reparados, ETsArray[x].reparados);
 	car.reparado = true;
-	reparados[ETsArray[x].reparados] = car;
+	reparados[ETsArray[x].reparados - 1] = car;
 	ETsArray[x].Reparados = reparados;
 }
 
