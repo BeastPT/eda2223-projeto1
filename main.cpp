@@ -101,7 +101,11 @@ int main(int argc, char* argv[]) {
 			case 2:
 				printCars(data, FilaLEspera, data->ETsArray, true);
 				Atreparacao(FilaLEspera);
-			}
+			
+			case 4:
+				removerMecanico(data->ETs, data->ETsArray, FilaLEspera);
+
+		}
 		}
 		else
 			break;

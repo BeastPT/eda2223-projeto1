@@ -15,3 +15,5 @@ int totalCars(int ETs, ET* ETsArray);
 void repararCarros(int ETs, ET* ETsArray);
 
 void repararManual(int ETs, ET* ETsArray);
+
+void removerMecanico(int ETs, ET* ETsArray, LEspera& f);
