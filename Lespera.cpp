@@ -17,14 +17,12 @@ void createCarLEspera(Data* data, LEspera& f, int amount) {
 	for (int i = 0; i < amount; i++)
 	{
 		Car* car = new Car;
-		car->id = i + 1;
+		car->id = data->Cars++;
 		car->marca = data->Marcas[rand() % data->ETs];
 		car->modelo = data->Modelo[rand() % data->sizeModelos];
 		car->temporeparar = rand() % 4 + 2;
-		car->prioritario = (rand() % 100 < 50) ? true : false; // 100 < 5
-		car->prioritario = false; //(rand() % 100 < 50) ? true : false; // 100 < 5
+		car->prioritario = (rand() % 100 < 5) ? true : false;
 		addToLEspera(f, car);
-		data->Cars++;
 	}
 }
 

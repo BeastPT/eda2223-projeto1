@@ -59,7 +59,6 @@ void addCarToET(Data* data, LEspera& f) {
 	catch (Car car) {
 		return;
 	}
-	//cout << "Car ID: " << car.id << endl;
 	for (int j = 0; j < data->ETs; j++) {
 		if (data->ETsArray[j].marca == car.marca) {
 			car.idet = j;
@@ -81,10 +80,10 @@ int totalCars(int ETs, ET* ETsArray) {
 
 Car* ETsCarsArray(int ETs, int TotalCars, ET* ETsArray) {
 	Car* auxx = new Car[TotalCars];
-
+	int aux = 0;
 	for (int i = 0; i < ETs; i++) {
 		for (int j = 0; j < ETsArray[i].lotacao; j++) {
-			auxx[j] = ETsArray[i].Reparando[j];
+			auxx[aux++] = ETsArray[i].Reparando[j];
 		}
 	}
 	return auxx;

@@ -71,7 +71,7 @@ int main(int argc, char* argv[]) {
 	while (true){
 		cout << "Pressione a letra 's' se quiser simular, ou então a letra 'g' se quiser aceder a gestão :" << endl;
 		cin >> letra;
-		if (letra == 's') {
+		if (letra == 's' || letra == 'S') {
 			createCarLEspera(data, FilaLEspera, 10);
 			repararCarros(data->ETs, data->ETsArray);
 			for (int i = 0; i < 10; i++)
@@ -99,11 +99,26 @@ int main(int argc, char* argv[]) {
 				printETs(data->ETs, data->ETsArray);
 				break;
 			case 2:
-				printCars(data, FilaLEspera, data->ETsArray, true);
 				Atreparacao(FilaLEspera);
-			
+				break;
+			case 3:
+				break;
 			case 4:
 				removerMecanico(data->ETs, data->ETsArray, FilaLEspera);
+				break;
+
+			case 7:
+				cout << "**** Oficina ****" << endl;
+				cout << "1. Mostrar por ordem Alfabética" << endl;
+				cout << "2. Mostrar por Tempo de Reparação" << endl;
+				int opc;
+				cin >> opc;
+				if (opc == 1)
+					printCars(data, FilaLEspera, data->ETsArray, true);
+				else
+					printCars(data, FilaLEspera, data->ETsArray, false);
+				break;
+
 
 		}
 		}

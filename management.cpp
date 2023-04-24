@@ -10,23 +10,37 @@ using namespace std;
 void printCars(Data* data, LEspera& f, ET* ETsArray, bool alpha) {
 	// put both arrays in one
 	Car** LEsperaArray = LEsperaToArray(f);
-	int LESize = sizeof(LEsperaArray);
+	int LESize = sizeLEspera(f);
+	//cout << "LESize: " << LESize << endl;
 
 	int ETSize = data->ETs;
 	int totalCarsETs = totalCars(ETSize, ETsArray);
+	//cout << "totalCarsETs: " << totalCarsETs << endl;
 
 	Car* ETsCarArray = ETsCarsArray(ETSize, totalCarsETs, ETsArray);
 
 	int TotalCars = LESize + totalCarsETs;
 	Car* Cars= new Car[TotalCars];
 
-	for (int i = 0; i < LESize; i++) {
-		Cars[i] = *LEsperaArray[i];
+	if (LESize == 0) {
+		for (int i = 0; i < totalCarsETs; i++) {
+			Cars[i] = ETsCarArray[i];
+		}
 	}
-
-	for (int i = 0; i < totalCarsETs; i++) {
-		Cars[i + LESize] = ETsCarArray[i];
+	else if (totalCarsETs == 0) {
+		for (int i = 0; i < LESize; i++) {
+			Cars[i] = *LEsperaArray[i];
+		}
 	}
+	else {
+		for (int i = 0; i < totalCarsETs; i++) {
+			Cars[i] = ETsCarArray[i];
+		}
+		for (int i = 0; i < LESize; i++) {
+			Cars[i+totalCarsETs] = *LEsperaArray[i];
+		}
+	}
+	
 
 	if (alpha) { // Sort by Alpha
 		for (int i = 0; i < TotalCars; i++) {
