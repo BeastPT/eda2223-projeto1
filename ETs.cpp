@@ -195,7 +195,7 @@ void removerMecanico(int ETs, ET* ETsArray, LEspera& f,Data* data) {
 
 	// Novo Mecanico
 		ETsArray[imec].id = idmec;
-		cout << "Qual será o mecânico para a ET " << imec << "? ";
+		cout << "Qual será o mecânico para a ET " << imec + 1 << "? ";
 		cin >> data->ETsArray[imec].mecanico;
 		string marca = getUnusedMarca(data, data->Marca, imec);
 		data->ETsArray[imec].marca = marca;
