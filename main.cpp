@@ -106,7 +106,8 @@ int main(int argc, char* argv[]) {
 
 				break;
 			case 4:
-				removerMecanico(data->ETs, data->ETsArray, FilaLEspera);
+				removerMecanico(data->ETs, data->ETsArray, FilaLEspera,data);
+				printETs(data->ETs, data->ETsArray);
 				break;
 			case 5:
 				saveCars(FilaLEspera, data, filepaths);

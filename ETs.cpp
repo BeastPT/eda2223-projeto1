@@ -158,8 +158,9 @@ void repararManual(int ETs, ET* ETsArray) {
 
 
 
-void removerMecanico(int ETs, ET* ETsArray, LEspera& f) {
+void removerMecanico(int ETs, ET* ETsArray, LEspera& f,Data* data) {
 	string nomeMecanico;
+	int idmec, imec;
 	cout << "Diga o nome do mecanico para remover: ";
 	cin >> nomeMecanico;
 	bool removed = false;
@@ -169,10 +170,12 @@ void removerMecanico(int ETs, ET* ETsArray, LEspera& f) {
 			for (int j = 0; j < ETsArray[i].lotacao; j++) {
 				Car car = ETsArray[i].Reparando[j];
 				addReparados(ETsArray, car, i);
+				idmec = ETsArray[i].id;
+				imec = i;
 
 				// Se o mecanico for o unico com essa marca, fazer inacessivel
 				for (int k = 0; k < ETsArray[i].lotacao; k++) {
-					if (car.marca != ETsArray[i].marca && ETsArray[k].mecanico == nomeMecanico ) {
+					if (car.marca == ETsArray[i].marca && ETsArray[k].mecanico == nomeMecanico ) {
 						break;
 					}
 				} //help
@@ -181,10 +184,6 @@ void removerMecanico(int ETs, ET* ETsArray, LEspera& f) {
 			ETsArray[i].mecanico = ""; 
 			removed = true;
 			break;
-		}
-		else
-		{
-			cout << "Não existe um mecânico com esse nome!\n";
 		}
 	}
 	if (!removed) {
@@ -195,19 +194,20 @@ void removerMecanico(int ETs, ET* ETsArray, LEspera& f) {
 
 
 	// Novo Mecanico
-	ET newET;
-    cout << "Nome do mecânico: ";
-    cin >> newET.mecanico;
-    cout << "Qual é a capacidade: ";
-    cin >> newET.capacidade;
-    newET.Reparando = new Car[newET.capacidade];
-    newET.reparados = 0;
+		ETsArray[imec].id = idmec;
+		cout << "Qual será o mecânico para a ET " << imec << "? ";
+		cin >> data->ETsArray[imec].mecanico;
+		string marca = getUnusedMarca(data, data->Marca, imec);
+		data->ETsArray[imec].marca = marca;
+		data->Marcas[imec] = marca;
+		data->ETsArray[imec].capacidade = rand() % 6 + 3;
+		data->ETsArray[imec].Reparando = new Car[data->ETsArray[imec].capacidade];
 
 
-	ETsArray[ETs] = newET;
+
 
 	// nunca serão reparados
-	for (int i = 0; i < ETsArray[i].lotacao; i++) {
+	/*for (int i = 0; i < ETsArray[i].lotacao; i++) {
 
 			for (int j = 0; j < ETs; j++) {
 				if (ETsArray[j].mecanico == ETsArray[i].marca) {
@@ -220,6 +220,7 @@ void removerMecanico(int ETs, ET* ETsArray, LEspera& f) {
 			}
 		
 	}
+	*/
 }
 
 
