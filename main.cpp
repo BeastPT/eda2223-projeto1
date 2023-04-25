@@ -55,7 +55,6 @@ int main(int argc, char* argv[]) {
 	createLEspera(FilaLEspera);
 	createCarLEspera(data, FilaLEspera, 10);
 
-	printLEspera(FilaLEspera);
 	cout << endl;
 	printETs(data->ETs, data->ETsArray);
 	cout << endl;
@@ -104,6 +103,7 @@ int main(int argc, char* argv[]) {
 				Atreparacao(FilaLEspera);
 				break;
 			case 3:
+
 				break;
 			case 4:
 				removerMecanico(data->ETs, data->ETsArray, FilaLEspera);
@@ -117,9 +117,7 @@ int main(int argc, char* argv[]) {
 				delete[] data->Marcas;
 				delete[] data->ETsArray;
 				deleteLEspera(FilaLEspera);
-				cout << "1111" << endl;
 				loadETs(data, filepaths);
-				cout << "2222" << endl;
 				loadCars(FilaLEspera, data, filepaths);
 				cout << "Oficina carregada com sucesso!" << endl;
 				break;

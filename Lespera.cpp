@@ -208,6 +208,9 @@ void addCarPriority(LEspera& f, int ID) {
 			}
 			aux = aux->seguinte;
 		}
+		if (aux == NULL) {
+			cout << "Não existe nenhum carro com esse ID na Fila de Espera!" << endl;
+		}
 	}
 }
 

@@ -81,19 +81,27 @@ void saveCars(LEspera& f,Data* data , Filepaths* filepath) {
 			aux = aux->seguinte;
 		}
 	}
+
 	for (int i = 0; i < data->ETs; i++) {
 		// A reparar
 		for (int j = 0; j < data->ETsArray[i].lotacao; j++) {
 			Car aux = data->ETsArray[i].Reparando[j];
-			file << aux.id << " " << replaceSpaces(aux.marca) << " " << aux.modelo << " " << false << " " << aux.prioritario << " " << false << " " << i << " " << aux.temporeparar << " " << aux.tempoet << endl;
+			file << aux.id << " " << replaceSpaces(aux.marca) << " " << aux.modelo << " " << false << " " << aux.prioritario << " " << false << " " << i + 1 << " " << aux.temporeparar << " " << aux.tempoet;
+			if (j < data->ETsArray[i].lotacao - 1)
+				file << endl;
 		}
 		// Reparados
 		if (data->ETsArray[i].reparados != 0) {
+			file << endl;
 			for (int j = 0; j < data->ETsArray[i].reparados; j++) {
 				Car aux = data->ETsArray[i].Reparados[j];
-				file << aux.id << " " << replaceSpaces(aux.marca) << "-" << aux.modelo << " " << false << " " << aux.prioritario << " " << true << " " << i << " " << aux.temporeparar << " " << aux.tempoet << " " << endl;
+				file << aux.id << " " << replaceSpaces(aux.marca) << " " << aux.modelo << " " << false << " " << aux.prioritario << " " << true << " " << i + 1 << " " << aux.temporeparar << " " << aux.tempoet;
+				if (j < data->ETsArray[i].reparados - 1)
+					file << endl;
 			}
 		}
+		if (i < data->ETs - 1)
+			file << endl;
 	}
 
 	file.close();
@@ -108,7 +116,7 @@ void saveETs(Data* data, Filepaths* filepath) {
 	// ID_OFICINA MECANICO MARCA CAPACIDADE LOTACAO REPARADOS FATURACAO
 
 	for (int i = 0; i < data->ETs; i++) {
-		file << data->ETsArray[i].id << " " << data->ETsArray[i].mecanico << " " << replaceSpaces(data->ETsArray[i].marca) << " " << data->ETsArray[i].capacidade << " " << data->ETsArray[i].lotacao << " " << data->ETsArray[i].reparados << " " << data->ETsArray[i].faturacao;
+		file << data->ETsArray[i].id << " " << data->ETsArray[i].mecanico << " " << replaceSpaces(data->ETsArray[i].marca) << " " << data->ETsArray[i].capacidade << " " << data->ETsArray[i].lotacao << " " << data->ETsArray[i].reparados << " " << 0;//data->ETsArray[i].faturacao;
 		if (i != data->ETs - 1)
 			file << endl;
 	}
@@ -120,44 +128,47 @@ void saveETs(Data* data, Filepaths* filepath) {
 void loadCars(LEspera& f, Data* data, Filepaths* filepath) {
 	data->Cars = calculateSizeofFile(filepath->pathCars);
 	string* arrayFileContent = getContentFromFiles(filepath->pathCars, data->Cars);
+
 	for (int i=0; i< data->Cars; i++){
 		string s = arrayFileContent[i];
-		Car car;
+		Car* car = new Car;
 		size_t pos = 0;
 		string token;
 		int aux = 0;
 		string* info = new string[9];
 		while ((pos = s.find(" ")) != string::npos) {
-			token = s.substr(0, pos + 1);
+			token = s.substr(0, pos);
 			s.erase(0, pos + 1);
 			info[aux++] = token;
 		}
-		car.id = stoi(info[0]);
-		car.marca = replacePlus(info[1]);
-		car.modelo = info[2];
-		car.fila = (info[3] == "1" ? true : false);
-		car.prioritario = (info[4] == "1" ? true : false);
-		car.reparado = (info[5] == "1" ? true : false);
-		car.idet = stoi(info[6]);
-		car.temporeparar = stoi(info[7]);
-		car.tempoet = stoi(s);
+		car->id = stoi(info[0]);
+		car->marca = replacePlus(info[1]);
+		car->modelo = info[2];
+		car->fila = (info[3].compare("1") == 0 ? true : false);
+		car->prioritario = (info[4].compare("1") == 0 ? true : false);
+		car->reparado = (info[5].compare("1") == 0 ? true : false);
+		car->idet = stoi(info[6]);
+		car->temporeparar = stoi(info[7]);
+		car->tempoet = stoi(s);
 
-		if (car.idet != 0 && !car.reparado) {
-			data->ETsArray[car.idet - 1].Reparando[data->ETsArray[car.idet - 1].lotacao++] = car;
+
+		if (car->idet != 0 && !car->reparado) {
+			data->ETsArray[car->idet - 1].Reparando[data->ETsArray[car->idet - 1].lotacao++] = *car;
 		}
-		else if (car.idet != 0 && car.reparado) {
-			addReparados(data->ETsArray, car, i);
+		else if (car->idet != 0 && car->reparado) {
+			addReparados(data->ETsArray, *car, car->idet-1);
 		}
 		else {
-			addToLEspera(f, &car);
+			addToLEspera(f, car);
 		}
 	}
-	//delete[] arrayFileContent;
+	delete[] arrayFileContent;
 }
 
 void loadETs(Data* data, Filepaths* filepath) {
 	data->ETs = calculateSizeofFile(filepath->pathETs);
-	cout << data->ETs << endl;
+	data->ETsArray = new ET[data->ETs];
+	data->Marcas = new string[data->ETs];
 	string* arrayFileContent = getContentFromFiles(filepath->pathETs, data->ETs);
 	for (int i = 0; i < data->ETs; i++) {
 		string s = arrayFileContent[i];
@@ -176,15 +187,12 @@ void loadETs(Data* data, Filepaths* filepath) {
 		et->marca = replacePlus(info[2]);
 		et->capacidade = stoi(info[3]);
 		et->lotacao = 0; //stoi(info[4]);
-		et->faturacao = 0; //stoi(info[5]);
-		et->reparados = stoi(s);
+		et->reparados = 0; //stoi(info[5]);
+		et->faturacao = 0; 
 		et->Reparando = new Car[et->capacidade];
-		et->Reparados = new Car[et->reparados];
-		cout << "end" << endl;
+		et->Reparados = new Car[stoi(info[5])];
 		data->ETsArray[i] = *et;
 		data->Marcas[i] = et->marca;
-
 	}
-	//delete[] arrayFileContent;
-
+	delete[] arrayFileContent;
 }
