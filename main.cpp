@@ -73,7 +73,7 @@ int main(int argc, char* argv[]) {
 		if (letra == 's' || letra == 'S') {
 			createCarLEspera(data, FilaLEspera, 10);
 			repararCarros(data->ETs, data->ETsArray);
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < 8; i++)
 			{
 				addCarToET(data, FilaLEspera);
 			}
