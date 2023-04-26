@@ -140,11 +140,19 @@ void repararManual(int ETs, ET* ETsArray) {
 			break;
 		}
 	}
+	if (aux == -1) {
+		cout << "Não existe nenhuma ET com essa marca" << endl;
+		return;
+	}
 	for (int j = 0; j < ETsArray[aux].lotacao; j++) {
 		if (ETsArray[aux].Reparando[j].modelo == modelorm) {
 			aux2 = j;
 			break;
 		}
+	}
+	if (aux == -2) {
+		cout << "Não existe nenhuma ET com esse modelo" << endl;
+		return;
 	}
 	int aux3 = ETsArray[aux].lotacao;
 	if (aux != -1 && aux2 != -1) {
@@ -160,7 +168,8 @@ void repararManual(int ETs, ET* ETsArray) {
 
 void removerMecanico(int ETs, ET* ETsArray, LEspera& f,Data* data) {
 	string nomeMecanico;
-	int idmec, imec;
+	//int idmec = 0;
+	int imec = 0;
 	cout << "Diga o nome do mecanico para remover: ";
 	cin >> nomeMecanico;
 	bool removed = false;
@@ -170,15 +179,8 @@ void removerMecanico(int ETs, ET* ETsArray, LEspera& f,Data* data) {
 			for (int j = 0; j < ETsArray[i].lotacao; j++) {
 				Car car = ETsArray[i].Reparando[j];
 				addReparados(ETsArray, car, i);
-				idmec = ETsArray[i].id;
+				//idmec = ETsArray[i].id;
 				imec = i;
-
-				// Se o mecanico for o unico com essa marca, fazer inacessivel
-				for (int k = 0; k < ETsArray[i].lotacao; k++) {
-					if (car.marca == ETsArray[i].marca && ETsArray[k].mecanico == nomeMecanico ) {
-						break;
-					}
-				} //help
 			}
 			ETsArray[i].lotacao = 0; 
 			ETsArray[i].mecanico = ""; 
@@ -192,35 +194,13 @@ void removerMecanico(int ETs, ET* ETsArray, LEspera& f,Data* data) {
 	}
 	cout << "Mecanico saiu da oficina\n";
 
-
-	// Novo Mecanico
-		ETsArray[imec].id = idmec;
-		cout << "Qual será o mecânico para a ET " << imec + 1 << "? ";
-		cin >> data->ETsArray[imec].mecanico;
-		string marca = getUnusedMarca(data, data->Marca, imec);
-		data->ETsArray[imec].marca = marca;
-		data->Marcas[imec] = marca;
-		data->ETsArray[imec].capacidade = rand() % 6 + 3;
-		data->ETsArray[imec].Reparando = new Car[data->ETsArray[imec].capacidade];
-
-
-
-
-	// nunca serão reparados
-	/*for (int i = 0; i < ETsArray[i].lotacao; i++) {
-
-			for (int j = 0; j < ETs; j++) {
-				if (ETsArray[j].mecanico == ETsArray[i].marca) {
-					true;
-					break;
-				}
-			}
-			if (true) {
-				cout << "A marca " << ETsArray[i].marca << " nao é possivel ser reparada.\n";
-			}
-		
-	}
-	*/
+	cout << "Qual será o mecânico para a ET " << imec + 1 << "? ";
+	cin >> ETsArray[imec].mecanico;
+	string marca = getUnusedMarca(data, data->Marca, imec);
+	ETsArray[imec].marca = marca;
+	data->Marcas[imec] = marca;
+	ETsArray[imec].capacidade = rand() % 6 + 3;
+	ETsArray[imec].Reparando = new Car[data->ETsArray[imec].capacidade];
 }
 
 

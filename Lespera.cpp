@@ -238,6 +238,7 @@ void Atreparacao(LEspera& f) {
 	cin >> modelat;
 	cout << "Qual o tempo que pretende para a reparação (2 a 5):" << endl;
 	cin >> trep;
+	bool auxB = false;
 	if (f.primeiro == NULL) 
 		cout << "Lista de espera vazia" << endl;
 	else {
@@ -246,9 +247,12 @@ void Atreparacao(LEspera& f) {
 			if (aux->car->marca == marcaat && aux->car->modelo == modelat) {
 				aux->car->temporeparar = trep;
 				aux = aux->seguinte;
+				auxB = true;
 			}
 			else
 				aux = aux->seguinte;
 		}
+		if (auxB == false)
+			cout << "Não existe nenhum carro com essa marca e modelo na Fila de Espera!" << endl;
 	}
 }

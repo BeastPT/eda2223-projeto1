@@ -13,7 +13,7 @@
 
 using namespace std;
 
-
+// app.exe savedETs.txt savedCars.txt
 int main(int argc, char* argv[]) {
 
 	srand(time(NULL));
@@ -30,17 +30,15 @@ int main(int argc, char* argv[]) {
 	data->Marca = getContentFromFiles(filepaths->pathMarcas, data->sizeMarcas);
 	data->Modelo = getContentFromFiles(filepaths->pathModelos, data->sizeModelos);
 
-	bool args = argv[1] && argv[2];	// main.exe savedETs.txt savedCars.txt
-
-	//filepaths->pathETs = (args == NULL) ? "savedETs.txt" : argv[1];
-	filepaths->pathETs = "savedETs.txt";
-	filepaths->pathCars = "savedCars.txt";
-	// Get Current ETs ID/Size
-	//data->ETs = calculateSizeofFile(filepaths->pathETs);
-
-	//filepaths->pathCars = (args == NULL) ? "savedCars.txt" : argv[2];
-	// Get Current Cars ID/Size
-	//data->Cars = calculateSizeofFile(filepaths->pathCars);
+	if (argv[1] && argv[2]) {
+		filepaths->pathETs = argv[1];
+		filepaths->pathCars = argv[2];
+		cout << argv[1] << "  " << argv[2] << endl;
+	}
+	else {
+		filepaths->pathETs = "savedETs.txt";
+		filepaths->pathCars = "savedCars.txt";
+	}
 
 	data->ETs = rand() % 6 + 3; // Number of ETs is going to have
 	cout << "A Oficina tem " << data->ETs << " Estações de Trabalho." << endl;
@@ -79,8 +77,8 @@ int main(int argc, char* argv[]) {
 			{
 				addCarToET(data, FilaLEspera);
 			}
+			printLEspera(FilaLEspera);
 			printETs(data->ETs, data->ETsArray);
-			//printCars(data, FilaLEspera, data->ETsArray, true);
 		}
 		else if (letra == 'g') {
 			cout << "**** Bem vindo Gestor ****" << endl;
@@ -103,10 +101,13 @@ int main(int argc, char* argv[]) {
 				Atreparacao(FilaLEspera);
 				break;
 			case 3:
-
+				int id;
+				cout << "Introduza o ID do carro que quer adicionar prioridade: " << endl;
+				cin >> id;
+				addCarPriority(FilaLEspera, id);
 				break;
 			case 4:
-				removerMecanico(data->ETs, data->ETsArray, FilaLEspera,data);
+				removerMecanico(data->ETs, data->ETsArray, FilaLEspera, data);
 				printETs(data->ETs, data->ETsArray);
 				break;
 			case 5:
@@ -136,16 +137,11 @@ int main(int argc, char* argv[]) {
 			default:
 				cout << "Opção inexistente" << endl;
 				break;
-
-
-		}
+			}
 		}
 		else
-			break;
+			cout << "Opção inexistente" << endl;
 	}
-
-
-	printCars(data, FilaLEspera, data->ETsArray, true);
 
 	delete filepaths;
 	delete data;
