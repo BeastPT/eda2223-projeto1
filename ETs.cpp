@@ -93,6 +93,7 @@ void cloneCarArray(Car* Cars1, Car* FinalCars, int size) {
 	for (int i = 0; i < size; i++) {
 		FinalCars[i] = Cars1[i];
 	}
+	delete Cars1;
 }
 
 void addReparados(ET* ETsArray, Car car, int x) {
