@@ -30,12 +30,14 @@
     <ClCompile Include="Lespera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="management.cpp" />
+    <ClCompile Include="Reparados.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ETs.h" />
     <ClInclude Include="files.h" />
     <ClInclude Include="LEspera.h" />
     <ClInclude Include="management.h" />
+    <ClInclude Include="Reparados.h" />
     <ClInclude Include="structs.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
