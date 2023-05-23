@@ -2,6 +2,7 @@
 
 #include "structs.h"
 #include "ETs.h"
+#include "Reparados.h"
 #include "LEspera.h"
 
 string getUnusedMarca(Data* data, string* marcas, int prev) {
@@ -89,21 +90,22 @@ Car* ETsCarsArray(int ETs, int TotalCars, ET* ETsArray) {
 	return auxx;
 }
 
-void cloneCarArray(Car* Cars1, Car* FinalCars, int size) {
-	for (int i = 0; i < size; i++) {
-		FinalCars[i] = Cars1[i];
-	}
-	delete Cars1;
-}
+//void cloneCarArray(Car* Cars1, Car* FinalCars, int size) {
+//	for (int i = 0; i < size; i++) {
+//		FinalCars[i] = Cars1[i];
+//	}
+//	delete Cars1;
+//}
 
 void addReparados(ET* ETsArray, Car car, int x) {
 	ETsArray[x].reparados++;
 	ETsArray[x].faturacao += 100;
-	Car* reparados = new Car[ETsArray[x].reparados + 1];
-	cloneCarArray(ETsArray[x].Reparados, reparados, ETsArray[x].reparados);
+	//Car* reparados = new Car[ETsArray[x].reparados + 1];
+	//cloneCarArray(ETsArray[x].Reparados, reparados, ETsArray[x].reparados);
 	car.reparado = true;
-	reparados[ETsArray[x].reparados - 1] = car;
-	ETsArray[x].Reparados = reparados;
+	ETsArray[x].Reparados = insert(ETsArray[x].Reparados, car);
+	//reparados[ETsArray[x].reparados - 1] = car;
+	//ETsArray[x].Reparados = reparados;
 }
 
 void repararCarros(int ETs, ET* ETsArray) {
@@ -124,6 +126,12 @@ void repararCarros(int ETs, ET* ETsArray) {
 		}
 		delete[] ETsArray[i].Reparando;
 		ETsArray[i].Reparando = reparando;
+		if (ETsArray[i].reparados > 0) {
+			cout << "Carros Reparados na ET " << ETsArray[i].id << ": " << ETsArray[i].reparados << endl;
+			printInOrder(ETsArray[i].Reparados, 1);
+		}
+		
+
 	}
 }
 
@@ -203,7 +211,3 @@ void removerMecanico(int ETs, ET* ETsArray, LEspera& f,Data* data) {
 	ETsArray[imec].capacidade = rand() % 6 + 3;
 	ETsArray[imec].Reparando = new Car[data->ETsArray[imec].capacidade];
 }
-
-
-	
-	

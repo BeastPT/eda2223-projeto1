@@ -1,12 +1,8 @@
 #pragma once
-#include "structs.h"
+
 #include "structs.h"
 
-struct No {
-	Car car;
-	No* Left;
-	No* Right;
-};
+using namespace std;
 
 No* newNo(Car car);
 

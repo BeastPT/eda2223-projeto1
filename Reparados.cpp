@@ -26,20 +26,20 @@ string toLowerCase(string str) {
 }
 
 No* insert(No* root, Car car) {
-	if (root == NULL) {
+	if (root == nullptr) {
 		return newNo(car);
 	}
-	else if (toLowerCase(car.marca) <= toLowerCase(root->car.marca)) {
+	else if (toLowerCase(car.modelo) <= toLowerCase(root->car.modelo)) {
 		root->Left = insert(root->Left, car);
 	}
-	else if (car.marca > root->car.marca) {
+	else {
 		root->Right = insert(root->Right, car);
 	}
 	return root;
 }
 
 void printInOrder(No* root, int lvl) {
-	if (root == NULL) {
+	if (root == nullptr) {
 		cout << endl;
 		return;
 	}
@@ -48,6 +48,6 @@ void printInOrder(No* root, int lvl) {
 	{
 		cout << "\t";
 	}
-	cout << root->car.marca << endl;
+	cout << root->car.modelo << endl;
 	printInOrder(root->Right, lvl + 1);
 }

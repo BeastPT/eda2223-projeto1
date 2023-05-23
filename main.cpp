@@ -10,7 +10,7 @@
 #include "LEspera.h"
 #include "ETs.h"
 #include "management.h"
-#include "Reparados.h"
+//#include "Reparados.h"
 
 using namespace std;
 

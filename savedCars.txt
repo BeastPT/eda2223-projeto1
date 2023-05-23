@@ -1,50 +1,50 @@
-20 Lamborghini ProMaster 1 0 0 0 2 0
-22 Mitsubishi Q8 1 0 0 0 4 0
-25 Audi V60 1 0 0 0 5 0
-26 Lamborghini Pilot 1 0 0 0 5 0
-27 Lamborghini NX 1 0 0 0 3 0
-28 Audi Civic 1 0 0 0 4 0
-29 Audi QX80 1 0 0 0 5 0
-30 Audi Highlander 1 0 0 0 2 0
-31 Mitsubishi Sprinter 1 0 0 0 2 0
-32 Lamborghini XT6 1 0 0 0 4 0
-34 Mitsubishi Ghost 1 0 0 0 5 0
-35 Audi GV60 1 0 0 0 3 0
-36 Lamborghini Forte 1 0 0 0 2 0
-37 Audi Accord 1 0 0 0 4 0
-38 Audi Altima 1 0 0 0 5 0
-39 Audi Charger 1 0 0 0 2 0
-40 Audi Terrain 1 0 0 0 2 0
-41 Lamborghini Suburban 1 0 0 0 4 0
-42 Mitsubishi Aventador 1 0 0 0 4 0
-43 Audi Insight 1 0 0 0 4 0
-44 Lamborghini Tacoma 1 0 0 0 2 0
-45 Lamborghini Camaro 1 0 0 0 3 0
-47 Audi Ocean 1 0 0 0 3 0
-48 Lamborghini GLS 1 0 0 0 4 0
-49 Lamborghini F-TYPE 1 0 0 0 3 0
-10 Lamborghini X1 0 0 0 0 5 3
-15 Lamborghini G80 0 0 0 0 3 3
-16 Lamborghini Canyon 0 0 0 0 5 3
-46 Lamborghini SF90 0 1 0 0 2 0
-19 Lamborghini RC 0 0 0 0 3 0
-8 Lamborghini-Taycan 0 0 1 0 3 0 
-6 Lamborghini-Continental 0 0 1 0 3 3 
-14 Lamborghini-R8 0 0 1 0 2 2 
-13 Audi XC40 0 0 0 1 2 2
-17 Audi MDX 0 0 0 1 4 1
-18 Audi F450 0 0 0 1 2 1
-23 Audi GV70 0 0 0 1 4 0
-24 Audi Bolt 0 0 0 1 2 0
-3 Audi-Sentra 0 0 1 1 5 1 
-2 Audi-EV9 0 0 1 1 2 2 
-7 Audi-ES 0 0 1 1 5 2 
-1 Audi-Mirage 0 0 1 1 3 3 
-5 Audi-Escalade 0 0 1 1 3 3 
-33 Mitsubishi Convertible 0 1 0 2 4 1
-12 Mitsubishi Niro 0 0 0 2 5 0
-21 Mitsubishi Range 0 0 0 2 2 0
-4 Mitsubishi-X4 0 0 1 2 5 0 
-0 Mitsubishi-A5 0 0 1 2 2 2 
-9 Mitsubishi-Corvette 0 0 1 2 3 3 
-11 Mitsubishi-C-Class 0 0 1 2 2 2 
+20 FIAT EV6 1 0 0 0 5 0
+21 FIAT RC 1 0 0 0 4 0
+24 FIAT G-Class 1 0 0 0 4 0
+25 FIAT M2 1 0 0 0 2 0
+29 Volvo Taycan 1 0 0 0 3 0
+30 FIAT F-TYPE 1 0 0 0 4 0
+33 FIAT Sequoia 1 0 0 0 3 0
+35 Volvo XT5 1 0 0 0 4 0
+37 Volvo F350 1 0 0 0 4 0
+38 FIAT SQ5 1 0 0 0 4 0
+40 FIAT C40 1 0 0 0 5 0
+41 Dodge A8 1 0 0 0 4 0
+42 Volvo R1T 1 0 0 0 5 0
+43 Dodge QX60 1 0 0 0 3 0
+44 FIAT Odyssey 1 0 0 0 2 0
+45 Volvo G-Class 1 0 0 0 2 0
+46 Dodge Veloster 1 0 0 0 2 0
+47 Volvo i7 1 0 0 0 5 0
+48 Volvo Colorado 1 0 0 0 5 0
+49 Volvo Envision 1 0 0 0 2 0
+13 Dodge LYRIQ 0 0 0 1 4 3
+16 Dodge TT 0 0 0 1 4 3
+17 Dodge Z4 0 0 0 1 5 3
+19 Dodge EV9 0 0 0 1 4 3
+23 Dodge LS 0 0 0 1 3 1
+31 Dodge EX90 0 0 0 1 3 1
+32 Dodge Defender 0 0 0 1 2 0
+34 Dodge Z 0 0 0 1 3 0
+1 Dodge Soul 0 0 1 1 3 0
+0 Dodge Mirage 0 0 1 1 3 2
+2 Dodge bZ4X 0 0 1 1 3 3
+5 Dodge Hornet 0 0 1 1 4 3
+4 Dodge Panamera 0 0 1 1 2 2
+9 FIAT Acadia 0 0 0 2 5 4
+15 FIAT MC20 0 0 0 2 2 2
+36 FIAT Malibu 0 1 0 2 3 1
+18 FIAT Hornet 0 0 0 2 3 0
+7 FIAT Q5 0 1 1 2 5 0
+12 FIAT Highlander 0 0 1 2 3 1
+3 FIAT Sonata 0 0 1 2 2 1
+10 FIAT Yukon 0 0 1 2 2 2
+11 Volvo Civic 0 0 0 3 5 3
+22 Volvo A7 0 0 0 3 2 2
+26 Volvo S7 0 0 0 3 5 2
+39 Volvo Taycan 0 1 0 3 4 1
+28 Volvo Q8 0 0 0 3 5 0
+6 Volvo Mirage 0 0 1 3 5 0
+27 Volvo GR86 0 0 1 3 2 0
+14 Volvo ProMaster 0 0 1 3 2 0
+8 Volvo SF90 0 0 1 3 3 3

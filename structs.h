@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 
 using namespace std;
@@ -22,6 +23,12 @@ struct Car {
 	int tempoet = 0;
 };
 
+struct No {
+	Car car;
+	No* Left;
+	No* Right;
+};
+
 struct ET {
 	int id = 0;
 	string mecanico = "";
@@ -31,7 +38,8 @@ struct ET {
 	int faturacao = 0;
 	int reparados = 0;
 	Car* Reparando = new Car;
-	Car* Reparados = new Car;
+	//Car* Reparados = new Car;
+	No* Reparados = nullptr;
 };
 
 struct Data {
