@@ -10,7 +10,7 @@
 #include "LEspera.h"
 #include "ETs.h"
 #include "management.h"
-//#include "Reparados.h"
+#include "Reparados.h"
 
 using namespace std;
 
@@ -83,20 +83,24 @@ int main(int argc, char* argv[]) {
 		}
 		else if (letra == 'g') {
 			cout << "**** Bem vindo Gestor ****" << endl;
-			cout << "1 - Reparação Manual " << endl;
+			cout << "1 - Reparação Manual" << endl;
 			cout << "2 - Atualizar tempo de reparação" << endl;
 			cout << "3 - Adicionar prioridade" << endl;
 			cout << "4 - Remover mecanico" << endl;
 			cout << "5 - Gravar oficina" << endl;
 			cout << "6 - Carregar oficina" << endl;
 			cout << "7 - Imprimir oficina" << endl;
+			cout << "8 - Imprimir carros reparados" << endl;
 			cout << "Escolha uma oppcao: " << endl;
 
 			cin >> opcao;
 			switch (opcao) {
 			case 1:
+				//cout << "Reparação Manual Desativado" << endl;
+				
 				repararManual(data->ETs, data->ETsArray);
 				printETs(data->ETs, data->ETsArray);
+				
 				break;
 			case 2:
 				Atreparacao(FilaLEspera);
@@ -134,6 +138,16 @@ int main(int argc, char* argv[]) {
 					printCars(data, FilaLEspera, data->ETsArray, true);
 				else
 					printCars(data, FilaLEspera, data->ETsArray, false);
+				break;
+			case 8:
+				cout << "**** Imprimir Carros Reparados ****" << endl;
+				cout << "Introduza o ID da ET que deseja visualizar: " << endl;
+				int opc2;
+				cin >> opc2;
+				if (opc2 <= data->ETs && opc2 > 0)
+					printInOrder(data->ETsArray[opc2-1].Reparados, 1);
+				else
+					cout << "ID inválido" << endl;
 				break;
 			default:
 				cout << "Opção inexistente" << endl;
