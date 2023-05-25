@@ -25,6 +25,7 @@
     <Text Include="savedETs.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ETN.cpp" />
     <ClCompile Include="ETs.cpp" />
     <ClCompile Include="files.cpp" />
     <ClCompile Include="Lespera.cpp" />
@@ -33,6 +34,7 @@
     <ClCompile Include="Reparados.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ETN.h" />
     <ClInclude Include="ETs.h" />
     <ClInclude Include="files.h" />
     <ClInclude Include="LEspera.h" />

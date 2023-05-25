@@ -47,6 +47,9 @@
     <ClCompile Include="Reparados.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ETN.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="files.h">
@@ -65,6 +68,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Reparados.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ETN.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
