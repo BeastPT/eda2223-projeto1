@@ -11,7 +11,6 @@
 #include "ETs.h"
 #include "management.h"
 #include "Reparados.h"
-#include "ETN.h"
 
 using namespace std;
 
@@ -47,7 +46,7 @@ int main(int argc, char* argv[]) {
 	data->Marcas = new string[data->ETs];
 	data->ETsArray = new ET[data->ETs];
 
-	//initializeETs(data);
+	initializeETs(data);
 
 
 	// Create LEspera and add 10 cars to it
@@ -56,16 +55,7 @@ int main(int argc, char* argv[]) {
 	createCarLEspera(data, FilaLEspera, 10);
 
 	cout << endl;
-
-	ETN* head = nullptr;
-	IniETN(data, head);
-	cout << "Lista:" << endl;
-	printETN(head);
-	cout << "Lista:" << endl;
-
-
-
-	/*printETs(data->ETs, data->ETsArray);
+	printETs(data->ETs, data->ETsArray);
 	cout << endl;
 	for (int i = 0; i < 10; i++)
 	{
@@ -73,7 +63,7 @@ int main(int argc, char* argv[]) {
 	}
 
 
-	printETs(data->ETs, data->ETsArray);*/
+	printETs(data->ETs, data->ETsArray);
 
 
 	char letra;

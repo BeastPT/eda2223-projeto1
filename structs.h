@@ -53,14 +53,3 @@ struct Data {
 	ET* ETsArray = new ET;
 	//string* CarsArray = new string;
 };
-
-struct ETN {
-	int idd;
-	string mecanicoo;
-	string marcaa;
-	int capacidadee;
-	int lotacaoo;
-	int faturacaoo;
-	int reparadoss;
-	ETN* next;
-};
