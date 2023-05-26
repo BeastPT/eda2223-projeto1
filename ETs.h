@@ -19,3 +19,5 @@ void addReparados(ET* ETsArray, Car car, int x);
 void repararManual(int ETs, ET* ETsArray);
 
 void removerMecanico(int ETs, ET* ETsArray, LEspera& f, Data* data);
+
+void AddET(Data* data);

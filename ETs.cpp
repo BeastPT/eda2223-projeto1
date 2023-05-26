@@ -68,9 +68,10 @@ void addCarToET(Data* data, LEspera& f) {
 			break;
 		}
 	}
-	
+
 	delete[] aux;
 }
+
 
 int totalCars(int ETs, ET* ETsArray) {
 	int TotalCars = 0;
@@ -221,4 +222,22 @@ void removerMecanico(int ETs, ET* ETsArray, LEspera& f,Data* data) {
 	data->Marcas[imec] = marca;
 	ETsArray[imec].capacidade = rand() % 6 + 3;
 	ETsArray[imec].Reparando = NULL;
+}
+
+void AddET(Data* data) {
+	int aux = data->ETs + 1;
+	ET* auxx = new ET[aux];
+	for (int i = 0; i < data->ETs; i++) {
+		auxx[i] = data->ETsArray[i];
+	}
+	auxx[aux - 1].id = aux;
+	cout << "Qual será o mecanico para a ET" << aux << ":" << endl;
+	cin >> auxx[aux - 1].mecanico;
+	cout << "Qual a marca :" << endl;
+	cin >> auxx[aux - 1].marca;
+	auxx[aux - 1].capacidade = rand() % 6 + 3;
+	delete[] data->ETsArray;
+	data->ETsArray = auxx;
+	data->ETs = aux;
+	//data->Marcas[aux] = marca;
 }

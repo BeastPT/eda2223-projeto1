@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
 		if (letra == 's' || letra == 'S') {
 			createCarLEspera(data, FilaLEspera, 10);
 			repararCarros(data->ETs, data->ETsArray);
-			for (int i = 0; i < 8; i++)
+			for (int i = 0; i < 9; i++)
 			{
 				addCarToET(data, FilaLEspera);
 			}
@@ -89,8 +89,9 @@ int main(int argc, char* argv[]) {
 			cout << "4 - Remover mecanico" << endl;
 			cout << "5 - Gravar oficina" << endl;
 			cout << "6 - Carregar oficina" << endl;
-			cout << "7 - Imprimir oficina" << endl;
-			cout << "8 - Imprimir carros reparados" << endl;
+			cout << "7 - Adicionar ET" << endl;
+			cout << "8 - Imprimir oficina" << endl;
+			cout << "9 - Imprimir carros reparados" << endl;
 			cout << "Escolha uma oppcao: " << endl;
 
 			cin >> opcao;
@@ -129,6 +130,9 @@ int main(int argc, char* argv[]) {
 				cout << "Oficina carregada com sucesso!" << endl;
 				break;
 			case 7:
+				AddET(data);
+				break;
+			case 8:
 				cout << "**** Oficina ****" << endl;
 				cout << "1. Mostrar por ordem Alfabética" << endl;
 				cout << "2. Mostrar por Tempo de Reparação" << endl;
@@ -139,7 +143,7 @@ int main(int argc, char* argv[]) {
 				else
 					printCars(data, FilaLEspera, data->ETsArray, false);
 				break;
-			case 8:
+			case 9:
 				cout << "**** Imprimir Carros Reparados ****" << endl;
 				cout << "Introduza o ID da ET que deseja visualizar: " << endl;
 				int opc2;
