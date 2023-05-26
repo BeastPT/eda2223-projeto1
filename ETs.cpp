@@ -8,7 +8,7 @@
 
 string getUnusedMarca(Data* data, string* marcas, int prev) {
 	bool aux = false;
-	string marca = data->Marcas[rand() % data->sizeMarcas];
+	string marca = data->Marca[rand() % data->sizeMarcas];
 	for (int i = 0; i < prev; i++) {
 		if (marca == marcas[i]) {
 			aux = true;
@@ -16,7 +16,7 @@ string getUnusedMarca(Data* data, string* marcas, int prev) {
 		}
 	}
 	if (aux) {
-		marca = data->Marcas[rand() % data->sizeMarcas];
+		marca = data->Marca[rand() % data->sizeMarcas];
 		return getUnusedMarca(data, marcas, prev);
 	}
 	else {
@@ -53,7 +53,7 @@ void addCarToET(Data* data, LEspera& f) {
 	int count = 0;
 	for (int i = 0; i < data->ETs; i++) {
 		if (data->ETsArray[i].lotacao < data->ETsArray[i].capacidade) {
-			aux[count++] = data->Marcas[i];
+			aux[count++] = data->ETsArray[i].marca;
 		}
 	}
 
@@ -70,13 +70,17 @@ void addCarToET(Data* data, LEspera& f) {
 		if (data->ETsArray[j].marca == car.marca) {
 			car.idet = j;
 			data->ETsArray[j].lotacao++;
-			data->ETsArray[j].Reparando = insertReparando(data->ETsArray[j].Reparando, car);
+
+			Reparando* newNode = new Reparando;
+			newNode->car = car;
+			newNode->Next = data->ETsArray[j].Reparando;
+			data->ETsArray[j].Reparando = newNode;
+
 			break;
 		}
 	}
 	delete[] aux;
 }
-
 int totalCars(int ETs, ET* ETsArray) {
 	int TotalCars = 0;
 	for (int i = 0; i < ETs; i++) {
@@ -88,15 +92,27 @@ int totalCars(int ETs, ET* ETsArray) {
 Car* ETsCarsArray(int ETs, int TotalCars, ET* ETsArray) {
 	Car* auxx = new Car[TotalCars];
 	int aux = 0;
+
 	for (int i = 0; i < ETs; i++) {
 		Car* carsEt = carArray(ETsArray[i].Reparando, ETsArray[i].lotacao);
+
 		for (int j = 0; j < ETsArray[i].lotacao; j++) {
-			auxx[aux++] = carsEt[j];
+			if (aux < TotalCars) {
+				auxx[aux++] = carsEt[j];
+			}
+			else {
+				// Lidar com a situação em que o tamanho máximo do array é excedido
+				// Aqui você pode gerar um erro, lançar uma exceção ou lidar com isso de outra forma
+				break;
+			}
 		}
+
 		delete[] carsEt; // Liberar a memória alocada pela função carArray
 	}
+
 	return auxx;
 }
+
 
 //void cloneCarArray(Car* Cars1, Car* FinalCars, int size) {
 //	for (int i = 0; i < size; i++) {
@@ -117,14 +133,20 @@ void repararCarros(int ETs, ET* ETsArray) {
 		if (ETsArray[i].lotacao == 0)
 			continue;
 		else {
-			int aux = 0;
-			int* ids = new int[ETsArray[i].lotacao];
+			No* head = nullptr; // Cabeça da lista ligada
+
 			Reparando* auxx = ETsArray[i].Reparando;
-			while (auxx != NULL) {
+			while (auxx != nullptr) {
 				Car car = auxx->car;
 				if ((rand() % 100 <= 15) || car.temporeparar <= car.tempoet) {
 					addReparados(ETsArray, car, i);
-					ids[aux++] = car.id;
+
+					// Criar um novo nó e adicionar o carro
+					No* newNode = new No;
+					newNode->car = car;
+					newNode->Right = head;
+					head = newNode;
+
 					ETsArray[i].lotacao--;
 				}
 				else {
@@ -133,11 +155,10 @@ void repararCarros(int ETs, ET* ETsArray) {
 				auxx = auxx->Next;
 			}
 
-			for (int j = 0; j < aux; j++) {
-				ETsArray[i].Reparando = removeReparando(ETsArray[i].Reparando, ids[j]);
-			}
-			delete[] ids;
+			// Atualizar a lista ligada de carros reparados na ET
+			ETsArray[i].Reparados = head;
 		}
+
 		if (ETsArray[i].reparados > 0) {
 			cout << "Carros Reparados na ET " << ETsArray[i].id << ": " << ETsArray[i].reparados << endl;
 			printInOrder(ETsArray[i].Reparados, 1);
@@ -220,22 +241,34 @@ void removerMecanico(int ETs, ET* ETsArray, LEspera& f, Data* data) {
 
 
 void AddET(Data* data) {
-	int aux = data->ETs + 1;
-	ET* auxx = new ET[aux];
-	for (int i = 0; i < data->ETs; i++) {
-		auxx[i] = data->ETsArray[i];
-	}
-	delete[] data->ETsArray; // Liberar a memória alocada anteriormente
-	data->ETsArray = auxx;
-	data->ETsArray[aux - 1].id = aux;
+	ET* newET = new ET;
 
-	cout << "Qual será o mecânico para a ET " << aux << ":" << endl;
-	cin >> data->ETsArray[aux - 1].mecanico;
+	// Preencher os dados do novo elemento
+	newET->id = data->ETs + 1;
+
+	cout << "Qual será o mecânico para a ET " << newET->id << ":" << endl;
+	cin >> newET->mecanico;
 
 	cout << "Qual a marca:" << endl;
-	cin >> data->ETsArray[aux - 1].marca;
+	cin >> newET->marca;
 
-	data->ETsArray[aux - 1].capacidade = rand() % 6 + 3;
+	newET->capacidade = rand() % 6 + 3;
 
-	data->ETs = aux;
+	// Adicionar o novo elemento ao final da lista ligada
+	if (data->ETsArray == nullptr) {
+		// A lista está vazia, o novo elemento será o primeiro
+		data->ETsArray = newET;
+	}
+	else {
+		// Procurar o último elemento da lista
+		ET* current = data->ETsArray;
+		while (current->Next != nullptr) {
+			current = current->Next;
+		}
+
+		// Adicionar o novo elemento após o último
+		current->Next = newET;
+	}
+
+	data->ETs++; // Incrementar o contador de ETs
 }

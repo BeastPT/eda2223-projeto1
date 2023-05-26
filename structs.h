@@ -35,16 +35,16 @@ struct Reparando {
 };
 
 struct ET {
-	int id = 0;
-	string mecanico = "";
-	string marca = "";
-	int capacidade = 0;
-	int lotacao = 0;
-	int faturacao = 0;
-	int reparados = 0;
-	Reparando* Reparando = NULL;
-	No* Reparados = nullptr;
-	ET* Next = nullptr; // Novo campo Next para a lista ligada
+    int id = 0;
+    string mecanico = "";
+    string marca = "";
+    int capacidade = 0;
+    int lotacao = 0;
+    int faturacao = 0;
+    int reparados = 0;
+    Reparando* Reparando = nullptr;
+    No* Reparados = nullptr;
+    ET* Next = nullptr; // Novo campo Next para a lista ligada
 };
 
 

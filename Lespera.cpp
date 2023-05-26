@@ -156,18 +156,19 @@ Car firstFromLEspera(LEspera& f) {
 }
 
 void printLEspera(LEspera& f) {
-	if (f.primeiro == NULL) {
+	if (f.primeiro == nullptr) {
 		cout << "Lista de espera vazia" << endl;
 	}
 	else {
 		LEspera::Item* aux = f.primeiro;
-		while (aux != NULL) {
+		while (aux != nullptr) {
 			cout << "-------------------------------------" << endl;
 			cout << "Carro: ID: " << aux->car->id << " | " << aux->car->marca << "-" << aux->car->modelo << " | Prioritario: " << ((aux->car->prioritario) ? "Sim" : "Não") << " | Tempo de reparacao: " << aux->car->temporeparar << " | Tempo de espera: " << aux->car->tempoet << endl;
 			aux = aux->seguinte;
 		}
 	}
 }
+
 
 char toLower(char c) {
 	if (c >= 'A' && c <= 'Z') {
