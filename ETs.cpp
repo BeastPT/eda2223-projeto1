@@ -133,20 +133,15 @@ void repararCarros(int ETs, ET* ETsArray) {
 		if (ETsArray[i].lotacao == 0)
 			continue;
 		else {
-			No* head = nullptr; // Cabeça da lista ligada
-
+			//No* head = nullptr; // Cabeça da lista ligada
+			int aux = 0;
+			int* ids = new int[ETsArray[i].lotacao];
 			Reparando* auxx = ETsArray[i].Reparando;
 			while (auxx != nullptr) {
 				Car car = auxx->car;
 				if ((rand() % 100 <= 15) || car.temporeparar <= car.tempoet) {
 					addReparados(ETsArray, car, i);
-
-					// Criar um novo nó e adicionar o carro
-					No* newNode = new No;
-					newNode->car = car;
-					newNode->Right = head;
-					head = newNode;
-
+					ids[aux++] = car.id;
 					ETsArray[i].lotacao--;
 				}
 				else {
@@ -154,9 +149,9 @@ void repararCarros(int ETs, ET* ETsArray) {
 				}
 				auxx = auxx->Next;
 			}
-
-			// Atualizar a lista ligada de carros reparados na ET
-			ETsArray[i].Reparados = head;
+			for (int j = 0; j < aux; j++) {
+				ETsArray[i].Reparando = removeReparando(ETsArray[i].Reparando, ids[j]);
+			}
 		}
 
 		if (ETsArray[i].reparados > 0) {
