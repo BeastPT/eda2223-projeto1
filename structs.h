@@ -42,11 +42,11 @@ struct ET {
 	int lotacao = 0;
 	int faturacao = 0;
 	int reparados = 0;
-	//Car* Reparando = new Car;
 	Reparando* Reparando = NULL;
-	//Car* Reparados = new Car;
 	No* Reparados = nullptr;
+	ET* Next = nullptr; // Novo campo Next para a lista ligada
 };
+
 
 struct Data {
 	string* Marca = new string;
@@ -56,6 +56,5 @@ struct Data {
 	int ETs = 0;
 	int Cars = 0;
 	string* Marcas = new string;
-	ET* ETsArray = new ET;
-	//string* CarsArray = new string;
+	ET* ETsArray = nullptr; // Modificado para ponteiro
 };
