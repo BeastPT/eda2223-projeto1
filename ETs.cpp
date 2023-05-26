@@ -3,6 +3,7 @@
 #include "structs.h"
 #include "ETs.h"
 #include "Reparados.h"
+#include "Reparando.h"
 #include "LEspera.h"
 
 string getUnusedMarca(Data* data, string* marcas, int prev) {
@@ -31,16 +32,14 @@ void initializeETs(Data* data) {
 		data->ETsArray[i].marca = marca;
 		data->Marcas[i] = marca;
 		data->ETsArray[i].capacidade = rand() % 6 + 3;
-		data->ETsArray[i].Reparando = new Car[data->ETsArray[i].capacidade];
+		//data->ETsArray[i].Reparando = new Car[data->ETsArray[i].capacidade];
 	}
 }
 
 void printETs(int ETs, ET* ETsArray) {
 	for (int i = 0; i < ETs; i++) {
 		cout << "ET: " << ETsArray[i].id << " | Mecânico: " << ETsArray[i].mecanico << " | Capacidade: " << ETsArray[i].capacidade << " | Carros: " << ETsArray[i].lotacao << " | Marca: " << ETsArray[i].marca << " | Total Faturação: " << ETsArray[i].faturacao << endl;
-		for (int j = 0; j < ETsArray[i].lotacao; j++) {
-			cout << "  Carro: ID:  " << ETsArray[i].Reparando[j].id << " | " << ETsArray[i].Reparando[j].marca << "-" << ETsArray[i].Reparando[j].modelo << " | Prioritário: " << ((ETsArray[i].Reparando[j].prioritario) ? "Sim" : "Não") << " | Tempo de reparacao: " << ETsArray[i].Reparando[j].temporeparar << " | Dias na ET: " << ETsArray[i].Reparando[j].tempoet << endl;
-		}
+		printReparando(ETsArray[i].Reparando);
 		cout << "--------------------------------------------------------------------------" << endl;
 	}
 }
@@ -63,11 +62,13 @@ void addCarToET(Data* data, LEspera& f) {
 	for (int j = 0; j < data->ETs; j++) {
 		if (data->ETsArray[j].marca == car.marca) {
 			car.idet = j;
-			data->ETsArray[j].Reparando[data->ETsArray[j].lotacao++] = car;
+			data->ETsArray[j].lotacao++;
+			//data->ETsArray[j].Reparando[data->ETsArray[j].lotacao++] = car;
+			data->ETsArray[j].Reparando = insertReparando(data->ETsArray[j].Reparando, car);
 			break;
-		}	
+		}
 	}
-
+	
 	delete[] aux;
 }
 
@@ -83,8 +84,12 @@ Car* ETsCarsArray(int ETs, int TotalCars, ET* ETsArray) {
 	Car* auxx = new Car[TotalCars];
 	int aux = 0;
 	for (int i = 0; i < ETs; i++) {
-		for (int j = 0; j < ETsArray[i].lotacao; j++) {
+		/*for (int j = 0; j < ETsArray[i].lotacao; j++) {
 			auxx[aux++] = ETsArray[i].Reparando[j];
+		}*/
+		Car* carsEt = carArray(ETsArray[i].Reparando, ETsArray[i].lotacao);
+		for (int j = 0; j < ETsArray[i].lotacao; j++) {
+			auxx[aux++] = carsEt[j];
 		}
 	}
 	return auxx;
@@ -110,28 +115,35 @@ void addReparados(ET* ETsArray, Car car, int x) {
 
 void repararCarros(int ETs, ET* ETsArray) {
 	for (int i = 0; i < ETs; i++) {
-		Car* reparando = new Car[ETsArray[i].capacidade];
-		int aux = 0;
-		int aux2 = ETsArray[i].lotacao;
-		for (int j = 0; j < aux2; j++) {
-			Car car = ETsArray[i].Reparando[j];
-			if ((rand() % 100 <= 15) || car.temporeparar <= car.tempoet) {
-				addReparados(ETsArray, car, i);
-				ETsArray[i].lotacao--;
+		//Car* reparando = new Car[ETsArray[i].capacidade];
+		if (ETsArray[i].lotacao == 0)
+			continue;
+		else {
+			int aux = 0;
+			int* ids = new int[ETsArray[i].lotacao];
+			Reparando* auxx = ETsArray[i].Reparando;
+			while (auxx->Next != NULL) {
+				Car car = auxx->car;
+				if ((rand() % 100 <= 15) || car.temporeparar <= car.tempoet) {
+					addReparados(ETsArray, car, i);
+					ids[aux++] = car.id;
+					ETsArray[i].lotacao--;
+				}
+				else {
+					car.tempoet++;
+				}
+				auxx = auxx->Next;
 			}
-			else {
-				car.tempoet++;
-				reparando[aux++] = car;
+
+			for (int j = 0; j < aux; j++) {
+				ETsArray[i].Reparando = removeReparando(ETsArray[i].Reparando, ids[j]);
 			}
-		}
-		delete[] ETsArray[i].Reparando;
-		ETsArray[i].Reparando = reparando;
+			delete ids;
+		} 
 		if (ETsArray[i].reparados > 0) {
 			cout << "Carros Reparados na ET " << ETsArray[i].id << ": " << ETsArray[i].reparados << endl;
 			printInOrder(ETsArray[i].Reparados, 1);
 		}
-		
-
 	}
 }
 
@@ -142,7 +154,6 @@ void repararManual(int ETs, ET* ETsArray) {
 	cout << "Qual o modelo do carro que quer reparar" << endl;
 	cin >> modelorm;
 	int aux = -1;
-	int aux2 = -1;
 	for (int i = 0; i < ETs; i++) {
 		if (ETsArray[i].marca == marcarm) {
 			aux = i;
@@ -153,24 +164,23 @@ void repararManual(int ETs, ET* ETsArray) {
 		cout << "Não existe nenhuma ET com essa marca" << endl;
 		return;
 	}
-	for (int j = 0; j < ETsArray[aux].lotacao; j++) {
+	/*for (int j = 0; j < ETsArray[aux].lotacao; j++) {
 		if (ETsArray[aux].Reparando[j].modelo == modelorm) {
 			aux2 = j;
 			break;
 		}
+	}*/
+	Car car;
+	try {
+		car = getCar(ETsArray[aux].Reparando, modelorm);
 	}
-	if (aux == -2) {
-		cout << "Não existe nenhuma ET com esse modelo" << endl;
+	catch (Car car) {
+		cout << "Essa ET não tem nenhum carro esse modelo" << endl;
 		return;
 	}
-	int aux3 = ETsArray[aux].lotacao;
-	if (aux != -1 && aux2 != -1) {
-		addReparados(ETsArray, ETsArray[aux].Reparando[aux2], aux);
-		for (int i = aux2; i < aux3 - 1; i++) {
-			ETsArray[aux].Reparando[i] = ETsArray[aux].Reparando[i + 1];
-		}
-		ETsArray[aux].lotacao--;
-	}
+	addReparados(ETsArray, car, aux);
+	ETsArray[aux].Reparando = removeReparando(ETsArray[aux].Reparando, car.id);
+	ETsArray[aux].lotacao--;
 }
 
 
@@ -185,12 +195,13 @@ void removerMecanico(int ETs, ET* ETsArray, LEspera& f,Data* data) {
 	for (int i = 0; i < ETs; i++) {
 		if (ETsArray[i].mecanico == nomeMecanico) {
 			// Move todos os carros para reparados
-			for (int j = 0; j < ETsArray[i].lotacao; j++) {
-				Car car = ETsArray[i].Reparando[j];
+			Reparando* aux = ETsArray[i].Reparando;
+			while (aux != NULL) {
+				Car car = aux->car;
 				addReparados(ETsArray, car, i);
-				//idmec = ETsArray[i].id;
-				imec = i;
+				aux = aux->Next;
 			}
+			imec = i;
 			ETsArray[i].lotacao = 0; 
 			ETsArray[i].mecanico = ""; 
 			removed = true;
@@ -209,5 +220,5 @@ void removerMecanico(int ETs, ET* ETsArray, LEspera& f,Data* data) {
 	ETsArray[imec].marca = marca;
 	data->Marcas[imec] = marca;
 	ETsArray[imec].capacidade = rand() % 6 + 3;
-	ETsArray[imec].Reparando = new Car[data->ETsArray[imec].capacidade];
+	ETsArray[imec].Reparando = NULL;
 }

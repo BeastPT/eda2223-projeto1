@@ -5,6 +5,7 @@
 #include "structs.h"
 #include "LEspera.h"
 #include "ETs.h"
+#include "Reparando.h"
 
 int calculateSizeofFile(string path) {
 
@@ -94,8 +95,9 @@ void saveCars(LEspera& f,Data* data , Filepaths* filepath) {
 
 	for (int i = 0; i < data->ETs; i++) {
 		// A reparar
+		Car* carArr = carArray(data->ETsArray[i].Reparando, data->ETsArray[i].lotacao);
 		for (int j = 0; j < data->ETsArray[i].lotacao; j++) {
-			Car aux = data->ETsArray[i].Reparando[j];
+			Car aux = carArr[j];
 			file << aux.id << " " << replaceSpaces(aux.marca) << " " << aux.modelo << " " << false << " " << aux.prioritario << " " << false << " " << i + 1 << " " << aux.temporeparar << " " << aux.tempoet;
 			if (j < data->ETsArray[i].lotacao - 1)
 				file << endl;
@@ -192,7 +194,8 @@ void loadCars(LEspera& f, Data* data, Filepaths* filepath) {
 
 
 		if (car->idet != 0 && !car->reparado) {
-			data->ETsArray[car->idet - 1].Reparando[data->ETsArray[car->idet - 1].lotacao++] = *car;
+			data->ETsArray[car->idet - 1].Reparando = insertReparando(data->ETsArray[car->idet - 1].Reparando , *car);
+			data->ETsArray[car->idet - 1].lotacao++;
 		}
 		else if (car->idet != 0 && car->reparado) {
 			addReparados(data->ETsArray, *car, car->idet-1);
@@ -228,7 +231,7 @@ void loadETs(Data* data, Filepaths* filepath) {
 		et->lotacao = 0; //stoi(info[4]);
 		et->reparados = 0; //stoi(info[5]);
 		et->faturacao = 0; 
-		et->Reparando = new Car[et->capacidade];
+		et->Reparando = NULL;
 		data->ETsArray[i] = *et;
 		data->Marcas[i] = et->marca;
 	}

@@ -29,6 +29,11 @@ struct No {
 	No* Right;
 };
 
+struct Reparando {
+	Car car;
+	Reparando* Next;
+};
+
 struct ET {
 	int id = 0;
 	string mecanico = "";
@@ -37,7 +42,8 @@ struct ET {
 	int lotacao = 0;
 	int faturacao = 0;
 	int reparados = 0;
-	Car* Reparando = new Car;
+	//Car* Reparando = new Car;
+	Reparando* Reparando = NULL;
 	//Car* Reparados = new Car;
 	No* Reparados = nullptr;
 };

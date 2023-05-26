@@ -31,6 +31,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="management.cpp" />
     <ClCompile Include="Reparados.cpp" />
+    <ClCompile Include="Reparando.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ETs.h" />
@@ -38,6 +39,7 @@
     <ClInclude Include="LEspera.h" />
     <ClInclude Include="management.h" />
     <ClInclude Include="Reparados.h" />
+    <ClInclude Include="Reparando.h" />
     <ClInclude Include="structs.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
