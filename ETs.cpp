@@ -266,4 +266,11 @@ void AddET(Data* data) {
 	}
 
 	data->ETs++; // Incrementar o contador de ETs
+
+	// Exemplo de exibição da nova ET adicionada
+	cout << "ET adicionada com sucesso!" << endl;
+	cout << "ID: " << newET->id << endl;
+	cout << "Mecânico: " << newET->mecanico << endl;
+	cout << "Marca: " << newET->marca << endl;
+	cout << "Capacidade: " << newET->capacidade << endl;
 }
