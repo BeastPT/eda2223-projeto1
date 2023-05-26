@@ -238,7 +238,6 @@ void removerMecanico(int ETs, ET* ETsArray, LEspera& f, Data* data) {
 void AddET(Data* data) {
 	ET* newET = new ET;
 
-	// Preencher os dados do novo elemento
 	newET->id = data->ETs + 1;
 
 	cout << "Qual será o mecânico para a ET " << newET->id << ":" << endl;
@@ -249,25 +248,17 @@ void AddET(Data* data) {
 
 	newET->capacidade = rand() % 6 + 3;
 
-	// Adicionar o novo elemento ao final da lista ligada
 	if (data->ETsArray == nullptr) {
-		// A lista está vazia, o novo elemento será o primeiro
 		data->ETsArray = newET;
 	}
 	else {
-		// Procurar o último elemento da lista
 		ET* current = data->ETsArray;
 		while (current->Next != nullptr) {
 			current = current->Next;
 		}
-
-		// Adicionar o novo elemento após o último
 		current->Next = newET;
 	}
-
-	data->ETs++; // Incrementar o contador de ETs
-
-	// Exemplo de exibição da nova ET adicionada
+	data->ETs++; 
 	cout << "ET adicionada com sucesso!" << endl;
 	cout << "ID: " << newET->id << endl;
 	cout << "Mecânico: " << newET->mecanico << endl;
